@@ -1,0 +1,30 @@
+@import '../login/login.component.scss';
+
+.success-message {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+  .info-panel {
+    display: none;
+  }
+
+  .form-panel {
+    flex-grow: 1;
+  }
+
+  .form-content {
+    box-shadow: none;
+    padding: 30px 20px;
+  }
+}

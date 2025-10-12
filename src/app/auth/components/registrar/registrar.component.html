@@ -1,0 +1,53 @@
+<div class="login-container">
+  <div class="form-panel">
+    <div class="form-content">
+      <header class="form-header">
+        <img src="assets/logo.png" alt="NeoLearnIA Logo" class="logo">
+        <h2>Cadastre-se</h2>
+      </header>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label for="name">Nome</label>
+          <input type="text" id="name" formControlName="userFirstName" required>
+        </div>
+
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="userEmail" required>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" formControlName="password" required>
+        </div>
+
+        <div class="input-group">
+          <label for="confirmPassword">Confirme sua senha</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" required>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">
+          Confirmar →
+        </button>
+
+        <a routerLink="/login" class="signup-link">Já tenho uma conta</a>        
+      </form>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <div class="info-content">
+      <p class="welcome-text">Bem-Vindo</p>
+      <h1>NeoLearnIA</h1>
+      <p class="subtitle">Nossa plataforma de estudos</p>
+    </div>
+  </div>
+</div>
