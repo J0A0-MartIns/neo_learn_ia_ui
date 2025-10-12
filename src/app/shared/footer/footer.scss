@@ -1,0 +1,14 @@
+@use 'colors' as *;
+
+.app-footer {
+  width: 100%;
+  background: $verde-escuro;
+  text-align: center;
+  padding: 1px;
+
+  .footer-content {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: $branco;
+  }
+}
