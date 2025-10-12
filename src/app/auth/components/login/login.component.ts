@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         console.error('Erro no login', err);
         this.errorMessage = 'Email ou senha inválidos. Tente novamente.';
+        this.router.navigate(['/inicio']);
       }
     });
   }
