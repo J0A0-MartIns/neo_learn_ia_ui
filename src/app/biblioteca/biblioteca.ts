@@ -3,12 +3,12 @@ import {RouterModule} from "@angular/router";
 import {CommonModule} from "@angular/common";
 
 @Component({
-  selector: 'app-inicio',
-  imports: [CommonModule, RouterModule],
+  selector: 'app-biblioteca',
+    imports: [CommonModule, RouterModule],
   standalone: true,
-  templateUrl: './inicio.html',
-  styleUrl: './inicio.scss'
+  templateUrl: './biblioteca.html',
+  styleUrl: './biblioteca.scss'
 })
-export class Inicio {
+export class Biblioteca {
 
 }

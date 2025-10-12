@@ -1,7 +1,7 @@
 @use 'colors' as *;
 
 .app-header {
-  position: fixed;
+  position: relative;
   height: auto;
   width: 100%;
   background: $branco;
@@ -40,6 +40,7 @@
     gap: 32px;
     padding-left: 32px;
     padding-right: 32px;
+    border-bottom: 1px solid $verde-escuro;
   }
 
   .link-menu {
