@@ -15,7 +15,7 @@ export class Biblioteca implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('acessToken');
+    const token = localStorage.getItem('auth_token');
     if (!token) {
       this.router.navigate(['/login']);
     }
