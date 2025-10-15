@@ -15,9 +15,8 @@ export class Inicio implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem('auth_token');
+    const token = localStorage.getItem('acessToken');
     if (!token) {
-      // sem token -> manda pro login
       this.router.navigate(['/login']);
     }
   }
