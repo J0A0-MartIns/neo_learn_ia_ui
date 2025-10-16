@@ -115,27 +115,9 @@
   border-radius: 5px;
 }
 
-.card-section {
-  font-family: 'Inter', serif;
-  margin-bottom: 16px;
-
-  label {
-    font-weight: bold;
-    color: #616161;
-    display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-  }
-
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #757575;
-    line-height: 1.5;
-  }
-
-  &.card-description, &.card-files {
-    padding-bottom: 8px;
-    border-bottom: 2px solid cor.$vermelho;
-  }
+.card-label.with-line {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid cor.$vermelho;
 }
