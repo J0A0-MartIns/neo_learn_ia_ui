@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ProjectList } from '../components/project-list/project-list';
-import {ProjectDetailsDialogComponent} from "./moda-new-project/project-details-dialog.component";
+import { ProjectDetailsDialogComponent } from "./moda-new-project/project-details-dialog.component";
 import { MatDialog } from '@angular/material/dialog';
+import { ProjectCardComponent } from '../components/project-card/project-card'; 
+import { MyProjectService } from './my-project.service';
+import { StudyProject } from '../shared/models/responseFindAllProjects';
 
 @Component({
   selector: 'app-meus-projetos',
@@ -11,15 +13,34 @@ import { MatDialog } from '@angular/material/dialog';
   imports: [
     CommonModule,
     RouterModule,
-    ProjectList
+    ProjectCardComponent
   ],
   templateUrl: './meus-projetos.html',
   styleUrl: './meus-projetos.scss'
 })
-export class MeusProjetos {
-  constructor(private dialog: MatDialog) {}
+export class MeusProjetos implements OnInit {
+  projects: StudyProject[] = [];
+  constructor(private dialog: MatDialog, private service: MyProjectService,) { 
+    
+  }
+    ngOnInit(): void {
+      this.loadProjects();
+  }
 
-  public openModal(){
+  loadProjects() {
+    this.service.findAllList().subscribe({
+      next: (response) => {
+        console.log('Dados Carregados: ', response);
+        this.projects = response;
+      },
+      error: (err) => {
+        console.error('Erro ao carregados projetos : ', err);
+      }
+    });
+  }
+
+ 
+  public openModal() {
     this.dialog.open(ProjectDetailsDialogComponent, {
       width: '800px',
       maxWidth: '95vw',

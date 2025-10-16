@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { firstValueFrom, Observable } from 'rxjs';
+import { StudyProject } from '../shared/models/responseFindAllProjects';
 
 
 export interface ProjectCreateData {
@@ -36,6 +37,14 @@ export class MyProjectService {
         });
 
         return this.http.post(`${this.apiUrl}/study-project`, formData, { headers });
+    }
+
+    findAllList(): Observable<any> {
+        const token = localStorage.getItem('auth_token') || '';
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project`, { headers });
     }
 
 
