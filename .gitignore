@@ -1,0 +1,108 @@
+# ============================================
+# 🔧 NODE / ANGULAR / TYPESCRIPT PROJECTS
+# ============================================
+
+# Dependências (instaladas via npm ou yarn)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output
+dist/
+out/
+tmp/
+temp/
+build/
+.cache/
+.angular/
+.angular/cache/
+.angular/ssr/
+
+# ============================================
+# ⚙️ CONFIGURAÇÕES DE AMBIENTE
+# ============================================
+
+# Variáveis de ambiente e segredos
+.env
+.env.*.local
+*.local
+
+# ============================================
+# 💻 IDEs / EDITORES
+# ============================================
+
+# VSCode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# IntelliJ / WebStorm / PhpStorm / Rider
+.idea/
+*.iml
+
+# Outros editores
+*.swp
+*.swo
+
+# ============================================
+# 🖼️ SISTEMAS OPERACIONAIS
+# ============================================
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ============================================
+# 🧪 TESTES E COBERTURA
+# ============================================
+
+coverage/
+test-results/
+karma-coverage/
+reports/
+
+# ============================================
+# 🧰 OUTROS ARQUIVOS GERADOS
+# ============================================
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Cache do Cypress / Playwright / Puppeteer
+.cypress/
+playwright-report/
+playwright/.cache/
+puppeteer/
+
+# Cache do ESLint / Prettier
+.eslintcache
+*.tsbuildinfo
+
+# ============================================
+# 🪶 OPCIONAIS
+# (Remova o comentário se quiser ignorar também)
+# ============================================
+
+# src/environments/ (caso queira manter segredos fora do git)
+# src/environments/
+
+# Arquivos de export temporários
+# *.zip
+# *.tar.gz
+# *.tmp
+
+# ============================================
+# ✅ FIM
+# ============================================

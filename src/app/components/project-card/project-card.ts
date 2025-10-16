@@ -1,41 +1,37 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { StudyProject } from '../../shared/models/responseFindAllProjects'; 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   templateUrl: './project-card.html',
-  styleUrl: './project-card.scss'
+  styleUrls: ['./project-card.scss'] 
 })
-export class ProjectCard {
+export class ProjectCardComponent {
 
-  conteudoParaExibir: string[] = [];
-  contadorOverflow = 0;
+  attachmentsToShow: string[] = [];
+  overflowCount = 0;
+
+  private _projectData!: StudyProject;
 
   @Input()
-  set dadosDoProjeto(data: any) {
-    if (!data || !data.conteudo) {
-      return;
-    }
+  set projectData(data: StudyProject) {
+    if (!data || !data.attachments) return;
 
-    this._dadosDoProjeto = data;
-    const total = data.conteudo.length;
+    this._projectData = data;
+    const total = data.attachments.length;
 
-    if (total <= 4) {
-      this.conteudoParaExibir = data.conteudo;
-      this.contadorOverflow = 0;
+    if (total <= 3) {
+      this.attachmentsToShow = data.attachments.map(a => a.fileName);
+      this.overflowCount = 0;
     } else {
-      this.conteudoParaExibir = data.conteudo.slice(0, 3);
-      this.contadorOverflow = total - 3;
+      this.attachmentsToShow = data.attachments.slice(0, 3).map(a => a.fileName);
+      this.overflowCount = total - 3;
     }
   }
 
-  get dadosDoProjeto(): any {
-    return this._dadosDoProjeto;
+  get projectData(): StudyProject {
+    return this._projectData;
   }
-
-  private _dadosDoProjeto: any;
 }
