@@ -39,11 +39,11 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         console.log('Login bem-sucedido!', response);
         localStorage.setItem('auth_token', response.acessToken);
+        this.router.navigate(['/inicio']);
       },
       error: (err) => {
         console.error('Erro no login', err);
         this.errorMessage = 'Email ou senha inválidos. Tente novamente.';
-        this.router.navigate(['/inicio']);
       }
     });
   }
