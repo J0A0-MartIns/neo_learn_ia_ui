@@ -1,23 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import {RouterModule} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-inicio',
-  standalone: true,
   imports: [CommonModule, RouterModule],
+  standalone: true,
   templateUrl: './inicio.html',
   styleUrl: './inicio.scss'
 })
+export class Inicio {
 
-export class Inicio implements OnInit {
-
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
-    const token = localStorage.getItem('auth_token');
-    if (!token) {
-      this.router.navigate(['/login']);
-    }
-  }
 }
