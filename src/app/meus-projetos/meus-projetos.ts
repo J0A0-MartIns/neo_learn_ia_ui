@@ -1,6 +1,6 @@
-import { Component ,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ProjectDetailsDialogComponent } from "./moda-new-project/project-details-dialog.component";
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectCardComponent } from '../components/project-card/project-card'; 
@@ -18,14 +18,20 @@ import { StudyProject } from '../shared/models/responseFindAllProjects';
   templateUrl: './meus-projetos.html',
   styleUrl: './meus-projetos.scss'
 })
+
 export class MeusProjetos implements OnInit {
   projects: StudyProject[] = [];
-  constructor(private dialog: MatDialog, private service: MyProjectService,) { 
+  constructor(private dialog: MatDialog, private service: MyProjectService, private router: Router) {
     
   }
     ngOnInit(): void {
       this.loadProjects();
-  }
+      const token = localStorage.getItem('auth_token');
+      if (!token) {
+          this.router.navigate(['/login']);
+      }
+
+    }
 
   loadProjects() {
     this.service.findAllList().subscribe({
