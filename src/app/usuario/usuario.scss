@@ -1,0 +1,63 @@
+.usuario-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+}
+
+.btn-salvar {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: #2c6ecb;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    background: #1e54a4;
+  }
+}
+
+.msg {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+
+  &.sucesso {
+    color: #2e8b57;
+  }
+
+  &.erro {
+    color: #c0392b;
+  }
+}
