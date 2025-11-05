@@ -3,10 +3,11 @@ import { MainLayout } from './layouts/main-layout/main-layout';
 import { BlankLayout } from './layouts/blank-layout/blank-layout';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegistrarComponent } from './auth/components/registrar/registrar.component';
-import { Inicio } from './inicio/inicio';
-import { MeusProjetos } from './meus-projetos/meus-projetos';
-import { Biblioteca } from './biblioteca/biblioteca';
+import { Inicio } from './inicio/inicio'
+import { MeusProjetos } from './meus-projetos/meus-projetos'
+import { Biblioteca } from './biblioteca/biblioteca'
 import { Usuario } from './usuario/usuario';
+import { ScheduleComponent } from './schedule/schedule-component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
             { path: 'inicio', component: Inicio},
             { path: 'biblioteca', component: Biblioteca},
             { path: 'meus-projetos', component: MeusProjetos},
+            { path: 'schedule', component: ScheduleComponent },
             { path : 'usuario', component: Usuario}
         ]
     },
