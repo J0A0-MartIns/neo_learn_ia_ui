@@ -28,6 +28,8 @@ export class RegistrarComponent implements OnInit {
   errorMessage: string | null = null;
   successMessage: string | null = null;
 
+  showSucessModal = false;
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -60,7 +62,7 @@ export class RegistrarComponent implements OnInit {
 
     this.authService.register(userData).subscribe({
       next: () => {
-        this.successMessage = 'Cadastro realizado com sucesso! Redirecionando para o login...';
+        this.showSucessModal = true;
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 2000);
@@ -75,4 +77,8 @@ export class RegistrarComponent implements OnInit {
       }
     });
   }
+  closeSucessModal(): void {
+    this.showSucessModal = false;
+  }
 }
+
