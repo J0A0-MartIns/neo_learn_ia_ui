@@ -9,17 +9,17 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
-  errorMessage: string | null = null;
+  showErrorModal = false;
 
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+      private fb: FormBuilder,
+      private authService: AuthService,
+      private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,21 +30,23 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.errorMessage = null;
     if (this.loginForm.invalid) {
-      this.errorMessage = 'Email ou senha inválidos. Tente novamente.';
+      this.showErrorModal = true;
       return;
     }
+
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        console.log('Login bem-sucedido!', response);
         localStorage.setItem('auth_token', response.acessToken);
         this.router.navigate(['/inicio']);
       },
-      error: (err) => {
-        console.error('Erro no login', err);
-        this.errorMessage = 'Email ou senha inválidos. Tente novamente.';
+      error: () => {
+        this.showErrorModal = true;
       }
     });
+  }
+
+  closeErrorModal(): void {
+    this.showErrorModal = false;
   }
 }

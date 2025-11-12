@@ -28,3 +28,70 @@
     padding: 30px 20px;
   }
 }
+
+/* === Modal de Sucesso com Fundo Embaçado === */
+.sucess-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px); /* <-- efeito de embaçado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeInBackdrop 0.3s ease;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+.sucess-modal {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px 80px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.sucess-icon {
+  background-color: #273d27;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px auto;
+}
+
+.error-modal p {
+  color: #273d27;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-ok-btn {
+  background-color: #C6F573;
+  border: none;
+  color: #333;
+  padding: 10px 30px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background-color: #b5e567;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
