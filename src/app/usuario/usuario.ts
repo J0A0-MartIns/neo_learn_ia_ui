@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { AuthService, UpdateUserProfile } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-usuario',
@@ -15,41 +16,67 @@ export class Usuario implements OnInit {
   mensagemSucesso = '';
   mensagemErro = '';
 
-  //Por hora será mock
-  usuarioMock = {
-    nome: 'Marcos Martins',
-    email: 'marcos@email.com',
-    telefone: '(62) 9 9999-8888',
-    cargo: 'Aluno',
-    instituicao: 'UEG '
-  };
-
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder, 
+    private authService: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
-      nome: [this.usuarioMock.nome, [Validators.required]],
-      email: [{ value: this.usuarioMock.email, disabled: true }],
-      telefone: [this.usuarioMock.telefone],
-      cargo: [this.usuarioMock.cargo],
-      instituicao: [this.usuarioMock.instituicao]
+      nome: ['', [Validators.required]],
+      email: [{ value: '', disabled: true }],
+      telefone: [''],
+      cargo: [''],
+      instituicao: ['']
+    });
+    if (isPlatformBrowser(this.platformId)) {
+      this.carregarDadosUsuario();
+    }
+  }
+
+  carregarDadosUsuario(): void {
+    this.authService.getProfile().subscribe({
+      next: (data) => {
+        this.usuarioForm.patchValue({
+          nome: data.userFirstName,
+          email: data.userEmail,
+          telefone: data.telefone,
+          cargo: data.cargo,
+          instituicao: data.instituicao
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao buscar dados do usuário', err);
+        this.mensagemErro = 'Não foi possível carregar seus dados.';
+      }
     });
   }
 
-  salvar(){
-    if(this.usuarioForm.invalid){
+  salvar(): void {
+    if (this.usuarioForm.invalid) {
       this.mensagemErro = "Preencha os campos obrigatórios";
       return;
     }
 
-    this.usuarioMock = {
-      ...this.usuarioMock,
-      ...this.usuarioForm.getRawValue()
+    const formData = this.usuarioForm.getRawValue();
+    const updateData: UpdateUserProfile = {
+      userFirstName: formData.nome,
+      telefone: formData.telefone,
+      cargo: formData.cargo,
+      instituicao: formData.instituicao
     };
 
-    this.mensagemErro = "";
-    this.mensagemSucesso = "Dados atualizados com sucesso!";
-    
-    setTimeout(() => this.mensagemSucesso = "", 3000);
+    this.authService.updateProfile(updateData).subscribe({
+      next: () => {
+        this.mensagemErro = "";
+        this.mensagemSucesso = "Dados atualizados com sucesso!";
+        setTimeout(() => this.mensagemSucesso = "", 3000);
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar dados', err);
+        this.mensagemErro = 'Erro ao salvar. Tente novamente.';
+      }
+    });
   }
 }
