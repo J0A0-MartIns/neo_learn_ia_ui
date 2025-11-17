@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProjectCardComponent } from '../components/project-card/project-card'; 
 import { MyProjectService } from './my-project.service';
 import { StudyProject } from '../shared/models/responseFindAllProjects';
+import { ProjectViewDialog } from './project-view-dialog/project-view-dialog';
 
 @Component({
   selector: 'app-meus-projetos',
@@ -52,4 +53,12 @@ export class MeusProjetos implements OnInit {
       maxWidth: '95vw',
     });
   }
+
+public openViewModal(project: StudyProject) {
+  this.dialog.open(ProjectViewDialog, {
+    width: '950px', // Largura maior para o layout horizontal
+    maxWidth: '95vw',
+    data: project   // Passa os dados do projeto clicado para o modal
+  });
+}
 }
