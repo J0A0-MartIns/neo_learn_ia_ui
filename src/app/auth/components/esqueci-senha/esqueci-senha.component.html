@@ -1,0 +1,19 @@
+<div class="login-container">
+  <div class="form-panel">
+    <h2>Recuperar Senha</h2>
+    <p>Informe seu email para receber o link de redefinição.</p>
+    
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" [(ngModel)]="email" placeholder="seu@email.com">
+    </div>
+
+    <button (click)="enviarEmail()" [disabled]="loading || !email">
+      {{ loading ? 'Enviando...' : 'Enviar Link' }}
+    </button>
+
+    <p *ngIf="mensagem" [class]="sucesso ? 'msg-sucesso' : 'msg-erro'">{{ mensagem }}</p>
+    
+    <a routerLink="/login" class="voltar">Voltar para Login</a>
+  </div>
+</div>

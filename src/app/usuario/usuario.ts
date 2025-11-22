@@ -2,11 +2,12 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AuthService, UpdateUserProfile } from '../auth/services/auth.service';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './usuario.html',
   styleUrls: ['./usuario.scss']
 })
@@ -19,7 +20,8 @@ export class Usuario implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private authService: AuthService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,10 @@ export class Usuario implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.carregarDadosUsuario();
     }
+    const token = localStorage.getItem('auth_token');
+      if (!token) {
+          this.router.navigate(['/login']);
+      }
   }
 
   carregarDadosUsuario(): void {

@@ -1,0 +1,55 @@
+<div class="login-container">
+  <div class="form-panel">
+    
+    <header class="form-header">
+      <h2>Redefinir Senha</h2>
+      <p>Crie uma nova senha segura para sua conta.</p>
+    </header>
+
+    <div *ngIf="!token" class="msg erro">
+      Token não encontrado na URL.
+    </div>
+
+    <form [formGroup]="resetForm" (ngSubmit)="onSubmit()" *ngIf="token && !sucesso">
+      
+      <div class="input-group">
+        <label for="password">Nova Senha</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          placeholder="Mínimo 6 caracteres"
+          [class.invalid]="resetForm.get('password')?.invalid && resetForm.get('password')?.touched"
+        >
+        <span class="error-text" *ngIf="resetForm.get('password')?.hasError('minlength')">
+          A senha deve ter pelo menos 6 caracteres.
+        </span>
+      </div>
+
+      <div class="input-group">
+        <label for="confirmPassword">Confirmar Senha</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          formControlName="confirmPassword" 
+          placeholder="Repita a nova senha"
+          [class.invalid]="resetForm.errors?.['mismatch'] && resetForm.get('confirmPassword')?.touched"
+        >
+        <span class="error-text" *ngIf="resetForm.errors?.['mismatch'] && resetForm.get('confirmPassword')?.touched">
+          As senhas não coincidem.
+        </span>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="resetForm.invalid || loading">
+        {{ loading ? 'Salvando...' : 'Redefinir Senha' }}
+      </button>
+
+    </form>
+
+    <p class="msg" [class.sucesso]="sucesso" [class.erro]="!sucesso" *ngIf="mensagem">
+      {{ mensagem }}
+    </p>
+
+    <a routerLink="/login" class="signup-link">Voltar para Login</a>
+  </div>
+</div>

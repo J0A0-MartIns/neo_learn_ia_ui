@@ -8,6 +8,9 @@ import { MeusProjetos } from './meus-projetos/meus-projetos'
 import { Biblioteca } from './biblioteca/biblioteca'
 import { Usuario } from './usuario/usuario';
 import { ScheduleComponent } from './schedule/schedule-component';
+import { ConfirmarEmailComponent } from './auth/components/confirmar-email/confirmar-email.component';
+import { EsqueciSenhaComponent } from './auth/components/esqueci-senha/esqueci-senha.component';
+import { RedefinirSenhaComponent } from './auth/components/redefinir-senha/redefinir-senha.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -27,7 +30,10 @@ export const routes: Routes = [
             { path: 'biblioteca', component: Biblioteca},
             { path: 'meus-projetos', component: MeusProjetos},
             { path: 'schedule', component: ScheduleComponent },
-            { path : 'usuario', component: Usuario}
+            { path : 'usuario', component: Usuario},
+            { path: 'confirmar-email', component: ConfirmarEmailComponent },
+            { path: 'esqueci-senha', component: EsqueciSenhaComponent },
+            { path: 'recuperar-senha', component: RedefinirSenhaComponent }
         ]
     },
 ];

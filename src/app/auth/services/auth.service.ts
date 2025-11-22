@@ -73,4 +73,22 @@ export class AuthService {
     }
     return null;
   }
+
+  confirmEmail(token: string): Observable<string> {
+    return this.http.get(`${this.apiUrl}/users/confirm-email?token=${token}`, { responseType: 'text' });
+  }
+
+  forgotPassword(email: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/users/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, password: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/users/reset-password?token=${token}`, { password });
+  }
+
+  updateEmail(newEmail: string): Observable<void> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token || ''}`);
+    return this.http.put<void>(`${this.apiUrl}/users/me/email`, { email: newEmail }, { headers });
+  }
 }
