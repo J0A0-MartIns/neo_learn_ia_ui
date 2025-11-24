@@ -1,0 +1,174 @@
+:host {
+  --primary-color: #1a4a44;
+  --form-bg-color: #ffffff;
+  --text-color-light: #ffffff;
+  --text-color-dark: #333;
+  --input-border-color: #e0e0e0;
+  --input-focus-border-color: #d9534f;
+}
+
+.login-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+.form-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.form-content {
+  background-color: var(--form-bg-color);
+  padding: 50px 60px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 30px;
+  .logo { width: 150px; margin-bottom: 10px; }
+  h2 { font-size: 2rem; color: var(--text-color-dark); margin: 0; }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  margin-bottom: 25px;
+  position: relative;
+  label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #888; }
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--input-border-color);
+    padding: 10px 0;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+    &:focus { border-bottom-color: var(--input-focus-border-color); }
+  }
+}
+
+.forgot-password, .signup-link {
+  font-size: 0.8rem;
+  color: #888;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+.forgot-password { display: block; text-align: right; margin-top: 5px; }
+.signup-link { display: block; text-align: center; margin-top: 20px; }
+
+.submit-btn {
+  background-color: #C6F573;
+  color: var(--text-color-dark);
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 20px;
+  align-self: flex-start;
+  &:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+  &:disabled { background-color: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+}
+
+.error-message {
+  color: #d9534f;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.info-panel {
+  flex: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color-light);
+  .info-content { text-align: left; max-width: 450px; }
+  .welcome-text { font-size: 1.5rem; font-weight: 300; }
+  h1 { font-size: 4.5rem; font-weight: bold; margin: 0; }
+  .subtitle { font-size: 1.5rem; font-weight: 300; margin-top: 10px; }
+}
+
+/* === Modal de Erro com Fundo Embaçado === */
+.error-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px); /* <-- efeito de embaçado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeInBackdrop 0.3s ease;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+.error-modal {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 40px 80px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.error-icon {
+  background-color: #a30000;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px auto;
+}
+
+.error-modal p {
+  color: #a30000;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.modal-ok-btn {
+  background-color: #C6F573;
+  border: none;
+  color: #333;
+  padding: 10px 30px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background-color: #b5e567;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

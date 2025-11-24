@@ -1,0 +1,44 @@
+<div class="dialog-container">
+    <div class="left">
+        <form [formGroup]="form">
+            <label>
+                <span>*Nome</span>
+                <input matInput formControlName="name" />
+                <mat-icon>edit</mat-icon>
+            </label>
+
+            <label>
+                <span>Descrição</span>
+                <textarea matInput formControlName="description" rows="4" placeholder="Adicionar descrição"></textarea>
+            </label>
+        </form>
+
+        <div class="actions">
+            <button mat-button color="warn" (click)="cancel()">Cancelar</button>
+            <button mat-button color="primary" (click)="save()">Salvar <mat-icon>add</mat-icon></button>
+        </div>
+    </div>
+
+    <div class="right">
+        <h3>Conteúdo</h3>
+        <div class="documents">
+
+            <!-- Botão estilizado que ativa input[type=file] escondido -->
+            <button mat-raised-button color="primary" (click)="fileInput.click()">Adicionar conteúdo</button>
+            <input
+                #fileInput
+                type="file"
+                hidden
+                (change)="onFileSelected($event)"
+            />
+
+            <!-- Lista de arquivos adicionados -->
+            <div class="doc" *ngFor="let doc of documents; let i = index">
+                {{ doc.name }}
+                <button mat-icon-button (click)="removeDocument(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

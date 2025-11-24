@@ -1,0 +1,39 @@
+<div class="usuario-container">
+
+  <h2>Seus Dados</h2>
+
+  <form [formGroup]="usuarioForm" (ngSubmit)="salvar()">
+
+    <div class="form-group">
+      <label>Nome</label>
+      <input type="text" formControlName="nome" placeholder="Seu nome completo">
+    </div>
+
+    <div class="form-group">
+      <label>Email (não editável)</label>
+      <input type="email" formControlName="email">
+    </div>
+
+    <div class="form-group">
+      <label>Telefone</label>
+      <input type="text" formControlName="telefone" placeholder="Seu telefone">
+    </div>
+
+    <div class="form-group">
+      <label>Cargo</label>
+      <input type="text" formControlName="cargo">
+    </div>
+
+    <div class="form-group">
+      <label>Instituição</label>
+      <input type="text" formControlName="instituicao">
+    </div>
+
+    <button type="submit" class="btn-salvar">Salvar Dados</button>
+
+    <p class="msg sucesso" *ngIf="mensagemSucesso">{{ mensagemSucesso }}</p>
+    <p class="msg erro" *ngIf="mensagemErro">{{ mensagemErro }}</p>
+
+  </form>
+
+</div>

@@ -1,0 +1,115 @@
+.dialog-container {
+  display: flex;
+  width: 100%;
+  max-width: 800px; /* para não passar de 800px */
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+
+
+  .left, .right {
+    flex: 1;
+    padding: 10px;
+  }
+
+  .left {
+    form {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        position: relative;
+
+        span {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+
+        mat-icon {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          font-size: 16px;
+        }
+
+        input, textarea {
+          border: none;
+          border-bottom: 2px solid #d44;
+          padding: 5px;
+          font-size: 14px;
+        }
+
+        textarea {
+          resize: none;
+        }
+      }
+
+      .info {
+        font-size: 12px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-start;
+      gap: 15px;
+
+      button {
+        background-color: #eaf5ce;
+        border-radius: 5px;
+      }
+
+      mat-icon {
+        margin-left: 4px;
+      }
+    }
+  }
+
+  .right {
+    border-left: 1px solid #ccc;
+    padding-left: 20px;
+
+    h3 {
+      border-bottom: 2px solid #d44;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+
+    .documents {
+      .doc {
+        background: #3cb7b7;
+        color: white;
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+          background: transparent;
+          color: white;
+        }
+      }
+
+      .doc:nth-child(even) {
+        background: #b6de8e;
+        color: black;
+
+        button {
+          color: black;
+        }
+      }
+    }
+  }
+}
+::ng-deep .success-snackbar {
+  background-color: #4caf50; // verde
+  color: white;
+  font-weight: bold;
+}

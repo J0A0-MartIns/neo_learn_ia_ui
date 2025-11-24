@@ -1,0 +1,23 @@
+<div class="card-wrapper">
+  <h3 class="card-title">{{ projectData.name }}</h3>
+
+  <div class="card-section">
+    <label class="card-label with-line">Descrição</label>
+    <p>{{ projectData.description }}</p>
+  </div>
+
+  <div class="card-section">
+    <label class="card-label with-line">Arquivos</label>
+
+    <div class="content-preview-grid">
+      <div *ngFor="let fileName of attachmentsToShow" class="file-container">
+        <div class="image-placeholder"></div>
+        <span class="file-name" [title]="fileName">{{ fileName }}</span>
+      </div>
+
+      <div *ngIf="overflowCount > 0" class="overflow-indicator">
+        +{{ overflowCount }}
+      </div>
+    </div>
+  </div>
+</div>

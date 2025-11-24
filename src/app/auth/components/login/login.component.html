@@ -1,0 +1,44 @@
+<div class="login-container">
+  <div class="form-panel">
+    <div class="form-content">
+      <header class="form-header">
+        <img src="assets/logo.png" alt="NeoLearnIA Logo" class="logo">
+        <h2>Login</h2>
+      </header>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="userEmail" required>
+        </div>
+
+        <div class="input-group">
+          <label f  or="password">Senha</label>
+          <input type="password" id="password" formControlName="password" required>
+          <a href="#" class="forgot-password">Esqueci minha senha</a>
+        </div>
+
+        <button type="submit" class="submit-btn">Entrar →</button>
+
+        <a routerLink="/register" class="signup-link">Não tenho cadastro</a>
+      </form>
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <div class="info-content">
+      <p class="welcome-text">Bem-Vindo</p>
+      <h1>NeoLearnIA</h1>
+      <p class="subtitle">Nossa plataforma de estudos</p>
+    </div>
+  </div>
+</div>
+
+<!-- === Modal de erro === -->
+<div class="error-modal-backdrop" *ngIf="showErrorModal">
+    <div class="error-modal">
+        <div class="error-icon">!</div>
+        <p>Credenciais inválidas!<br>Faça login novamente.</p>
+        <button class="modal-ok-btn" (click)="closeErrorModal()">OK</button>
+    </div>
+</div>
