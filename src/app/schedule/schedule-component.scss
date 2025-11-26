@@ -1,0 +1,151 @@
+$verde-escuro: #023535;
+$verde-claro: #CCEA8D;
+$verde-azulado: #0FC2C0;
+$branco: #FFFFFF;
+$preto: #000000;
+$vermelho: #800000;
+
+.schedule-container {
+  padding: 20px;
+  background: $verde-escuro;
+  min-height: 100vh;
+  color: $branco;
+  font-family: 'Arial', sans-serif;
+
+  .title {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    color: $verde-azulado;
+  }
+
+  .daily-hours {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+}
+
+.weeks-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.week-card {
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 6px solid $verde-azulado;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+  .week-title {
+    font-size: 22px;
+    color: $verde-claro;
+    margin-bottom: 20px;
+  }
+}
+
+.days-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.day-card {
+  background: rgba(255,255,255,0.08);
+  padding: 15px;
+  border-radius: 10px;
+  flex: 1 1 calc(33% - 20px);
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+
+  .day-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: $verde-claro;
+  }
+}
+
+.topics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.topic-card {
+  background: $branco;
+  color: $preto;
+  border-left: 5px solid $verde-azulado;
+  padding: 12px;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &.easy {
+    border-left-color: $verde-claro;
+  }
+
+  &.medium {
+    border-left-color: $verde-azulado;
+  }
+
+  &.hard {
+    border-left-color: $vermelho;
+  }
+
+  .topic-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+
+    .topic-difficulty { text-transform: uppercase; }
+  }
+
+  .topic-name {
+    font-size: 15px;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .day-card { flex: 1 1 100%; }
+}
+
+@media (max-width: 600px) {
+  .title { font-size: 22px !important; }
+}
+
+.week-pagination {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.week-button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.week-button:hover {
+  background: #eaeaea;
+}
+
+.week-button.active {
+  background: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+  font-weight: bold;
+}

@@ -1,1 +1,50 @@
-<p>schedule-component works!</p>
+<div class="schedule-container" *ngIf="scheduleData">
+  <h1 class="title">Cronograma de Estudos ({{ scheduleData.totalWeeks }} semanas)</h1>
+  <p class="daily-hours">
+    Horas diárias previstas: <strong>{{ scheduleData.dailyStudyHours }}</strong>
+  </p>
+
+  <!-- PAGINAÇÃO DE SEMANAS -->
+  <div class="week-pagination">
+    <button
+      class="week-button"
+      *ngFor="let week of scheduleData.schedule"
+      (click)="setCurrentWeek(week.week)"
+      [class.active]="currentWeek === week.week"
+    >
+      Semana {{ week.week }}
+    </button>
+  </div>
+
+  <div class="weeks-container">
+    <div class="week-card" *ngFor="let week of scheduleData.schedule">
+      
+      <!-- Mostra apenas a semana selecionada -->
+      <ng-container *ngIf="week.week === currentWeek">
+        <h2 class="week-title">Semana {{ week.week }}</h2>
+
+        <div class="days-container">
+          <div class="day-card" *ngFor="let day of week.days">
+            <h3 class="day-title">{{ day.day }}</h3>
+
+            <div class="topics-list">
+              <div
+                class="topic-card"
+                *ngFor="let topic of day.studyTopics"
+                [ngClass]="getDifficultyColor(topic.difficulty)"
+              >
+                <div class="topic-header">
+                  <span class="topic-difficulty">{{ topic.difficulty }}</span>
+                  <span class="topic-hours">{{ topic.allocatedHours }}h</span>
+                </div>
+                <p class="topic-name">{{ topic.topicName }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
