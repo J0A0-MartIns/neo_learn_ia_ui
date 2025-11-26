@@ -10,7 +10,9 @@ import { Usuario } from './usuario/usuario';
 import { ScheduleComponent } from './schedule/schedule-component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '',
+        loadComponent: () => import('./landing/landing.component').then(m => m.LandingComponent)
+     },
     {
         path: '',
         component: BlankLayout,
@@ -31,3 +33,4 @@ export const routes: Routes = [
         ]
     },
 ];
+
