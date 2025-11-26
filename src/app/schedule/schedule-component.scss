@@ -149,3 +149,80 @@ $vermelho: #800000;
   border-color: #4a90e2;
   font-weight: bold;
 }
+/* Estilos para o bloco de opções (quando não há cronograma) */
+.no-schedule-options-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Para centralizar verticalmente na tela */
+  padding: 20px;
+  background: $verde-escuro; /* Mantém o fundo escuro do seu tema */
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    min-height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+
+.option-card {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: $branco; /* Fundo branco para destaque */
+  color: $preto;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  mat-card-title {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: $verde-escuro;
+
+    .material-icons {
+      margin-right: 10px;
+      font-size: 28px;
+    }
+  }
+
+  mat-card-content p {
+    color: #555;
+    margin-top: 10px;
+  }
+
+  mat-card-actions {
+    padding: 16px;
+  }
+}
+
+.option-button {
+  width: 100%;
+  font-weight: bold;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+.primary-button {
+  background-color: $verde-azulado;
+  color: $branco;
+  &:hover {
+    background-color: darken($verde-azulado, 10%);
+  }
+}
+
+.secondary-button {
+  background-color: $verde-claro;
+  color: $preto;
+  &:hover {
+    background-color: darken($verde-claro, 10%);
+  }
+}

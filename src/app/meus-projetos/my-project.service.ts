@@ -47,5 +47,13 @@ export class MyProjectService {
         return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project`, { headers });
     }
 
+    findAllListforShedule(): Observable<any> {
+        const token = localStorage.getItem('auth_token') || '';
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+        return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project/projects-for-shedule`, { headers });
+    }
+
 
 }
