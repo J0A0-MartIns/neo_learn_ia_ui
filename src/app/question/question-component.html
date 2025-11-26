@@ -1,0 +1,38 @@
+<div class="question-container">
+
+    <header class="info-header">
+        <span class="tag">Matéria: Matemática</span>
+        <span class="tag">Disciplina: Matemática Financeira</span>
+        <span class="tag">Ano: 2024</span>
+        <span class="tag">Banca: FGV</span>
+    </header>
+
+    <div class="question-card">
+        <h2>Questão {{ questionNumber }}</h2>
+
+        <p class="question-text">
+            {{ questionText }}
+        </p>
+
+        <div class="options-grid">
+            <div
+                    *ngFor="let opt of options"
+                    class="option-tile"
+                    [class.selected]="selectedOption === opt.letter"
+                    (click)="selectOption(opt.letter)"
+            >
+                <span class="letter">{{ opt.letter }}</span>
+                <span class="text">{{ opt.text }}</span>
+            </div>
+        </div>
+
+        <button class="submit-btn" (click)="submitAnswer()">
+            Enviar Resposta
+        </button>
+
+        <p class="progress">
+            Questão {{ questionNumber }} de {{ totalQuestions }}
+        </p>
+    </div>
+
+</div>

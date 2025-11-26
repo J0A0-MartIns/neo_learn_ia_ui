@@ -8,6 +8,7 @@ import { MeusProjetos } from './meus-projetos/meus-projetos'
 import { Biblioteca } from './biblioteca/biblioteca'
 import { Usuario } from './usuario/usuario';
 import { ScheduleComponent } from './schedule/schedule-component';
+import { QuestionComponent } from './question/question-component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -27,7 +28,8 @@ export const routes: Routes = [
             { path: 'biblioteca', component: Biblioteca},
             { path: 'meus-projetos', component: MeusProjetos},
             { path: 'schedule', component: ScheduleComponent },
-            { path : 'usuario', component: Usuario}
+            { path : 'usuario', component: Usuario},
+            { path: 'question', component: QuestionComponent }
         ]
     },
 ];
