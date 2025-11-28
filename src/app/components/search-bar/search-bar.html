@@ -1,15 +1,22 @@
 <div class="search-container">
     <div class="search-box">
         <i class="fas fa-search"></i>
-        <input
-                type="text"
-                placeholder="Pesquise"
-        />
+        <input type="text" placeholder="Pesquise"/>
     </div>
+
     <button class="icon-btn">
         <i class="fas fa-filter"></i>
     </button>
-    <button class="icon-btn">
-        <i class="fa-solid fa-arrow-down-wide-short"></i>
-    </button>
+
+    <div class="sort-wrapper">
+        <button class="icon-btn" (click)="toggleSort()">
+            <i class="fa-solid fa-arrow-down-wide-short"></i>
+        </button>
+
+        <app-library-sort
+                *ngIf="isSortOpen"
+                (close)="closeSort()"
+                class="sort-dropdown"
+        ></app-library-sort>
+    </div>
 </div>
