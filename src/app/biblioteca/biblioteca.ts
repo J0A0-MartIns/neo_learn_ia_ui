@@ -18,7 +18,7 @@ export class Biblioteca implements OnInit {
 
     ngOnInit(): void {
         const token = localStorage.getItem('auth_token');
-        if (token) {
+        if (!token) {
             this.router.navigate(['/login']);
         }
     }
