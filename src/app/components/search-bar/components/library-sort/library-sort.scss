@@ -1,37 +1,27 @@
+@import '../../../../../assets/colors';
+
 .sort-box {
-  width: 400px;
-  height: 260px;
+  width: 220px;
   background: #fff;
-  padding: 20px;
+  padding: 8px 0;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0,0,0,.25);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
-label {
+.sort-item {
   font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.sort-btn {
-  width: 176px;
-  height: 44px;
-  background: #6D8681;
-  border: none;
-  border-radius: 12px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 16px;
   cursor: pointer;
+}
+
+.sort-item:hover {
+  background: $verde-claro;
+}
+
+.sort-item.selected {
+  background: $branco;
 }

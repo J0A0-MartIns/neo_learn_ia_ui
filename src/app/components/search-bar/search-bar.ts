@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LibrarySort} from "./components/library-sort/library-sort";
 
@@ -18,5 +18,15 @@ export class SearchBar {
 
   closeSort() {
     this.isSortOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+      const target = event.target as HTMLElement;
+      const clickedInsideButton = target.closest('.icon-btn');
+      const clickedInsideDropdown = target.closest('.sort-dropdown');
+      if (!clickedInsideButton && !clickedInsideDropdown) {
+          this.closeSort();
+      }
   }
 }
