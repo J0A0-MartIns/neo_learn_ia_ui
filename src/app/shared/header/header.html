@@ -5,7 +5,7 @@
         </div>
 
         <nav class="actions">
-            <a class="link-menu">Nome do Usuário</a>
+            <a class="link-menu">{{ userName }}</a>
 
             <a routerLink="/usuario" class="icon-link">
                 <i class="fa-solid fa-user"></i>
@@ -13,6 +13,10 @@
 
             <a routerLink="#" class="icon-link">
                 <i class="fa-solid fa-gear"></i>
+            </a>
+
+            <a (click)="onLogout()" class="icon-link logout-btn" title="Sair do Sistema">
+                <i class="fa-solid fa-right-from-bracket"></i>
             </a>
         </nav>
     </div>
