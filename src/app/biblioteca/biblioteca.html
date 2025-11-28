@@ -1,2 +1,14 @@
 <app-search-bar></app-search-bar>
-<app-project-card-library></app-project-card-library>
+
+<app-project-card-library (open)="openPopup()"></app-project-card-library>
+
+<app-library-popup
+        [isOpen]="popupOpen"
+        (close)="closePopup()"
+        (addProject)="openSuccessPopup()"
+></app-library-popup>
+
+<app-success-popup
+        [isOpen]="successOpen"
+        (close)="closeSuccessPopup()"
+></app-success-popup>

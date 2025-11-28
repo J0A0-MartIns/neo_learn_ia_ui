@@ -1,0 +1,52 @@
+<div class="overlay" *ngIf="isOpen">
+    <div class="modal">
+        <button class="close" (click)="closePopup()"><i class="fa-solid fa-xmark"></i></button>
+
+        <h1 class="project-title">NOME DO PROJETO PÚBLICO</h1>
+
+        <div class="content">
+            <div class="left-panel">
+                <h2 class="docs-title">Documentos contidos</h2>
+
+                <div class="documents-grid">
+                    <ng-container *ngFor="let d of docs">
+                        <div class="doc-card">
+                            <svg class="doc-icon" viewBox="0 0 24 24">
+                                <path fill="none" stroke="#023535" stroke-width="1.6"
+                                      d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                                <path fill="none" stroke="#023535" stroke-width="1.6"
+                                      d="M14 3v6h6"/>
+                            </svg>
+                            <div class="doc-name">NOMEARQUIVO.PDF</div>
+                            <div class="doc-type">{{d}}</div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <button class="download-all"><i class="fa-solid fa-arrow-down"></i>Baixar tudo</button>
+            </div>
+
+            <div class="right-panel">
+                <p class="description">
+                    DESCRIÇÃO PROJETO DESCRIÇÃO PROJETO DESCRIÇÃO PROJETO...
+                </p>
+
+                <p class="meta">
+                    Concurso: Banco do Brasil<br>
+                    Matérias: Matemática, Conhecimentos Bancários e Português<br>
+                    Disponibilizado em 20/09/2025 às 15h01
+                </p>
+
+                <div class="author">
+                    <div class="avatar"></div>
+                    <div class="author-info">
+                        <div class="author-label">Autor:</div>
+                        <div class="author-name">NOME DO ATOR</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="add-project" (click)="onAddProject()"><i class="fa-solid fa-plus"></i>Adicionar projeto</button>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+@import '../../../../assets/colors';
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal {
+  width: 540px;
+  background: $branco;
+  padding: 32px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  background: $verde-claro;
+  border-radius: 50%;
+  margin: 0 auto 24px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.check {
+  font-size: 64px;
+  color: $branco;
+  font-weight: bold;
+}
+
+.message {
+  font-size: 20px;
+  font-family: Inter, sans-serif;
+  margin-bottom: 32px;
+  color: $verde-escuro;
+}
+
+.ok-btn {
+  width: 176px;
+  height: 44px;
+  background: $verde-escuro;
+  border: none;
+  color: $branco;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
