@@ -2,6 +2,7 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 interface LoginRequest {
   userEmail: string;
@@ -44,7 +45,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
   ) { }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
@@ -90,5 +92,12 @@ export class AuthService {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token || ''}`);
     return this.http.put<void>(`${this.apiUrl}/users/me/email`, { email: newEmail }, { headers });
+  }
+
+  logout(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('auth_token');
+    }
+    this.router.navigate(['/login']);
   }
 }

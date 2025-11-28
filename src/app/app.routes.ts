@@ -19,7 +19,10 @@ export const routes: Routes = [
         component: BlankLayout,
         children: [
             { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegistrarComponent }
+            { path: 'register', component: RegistrarComponent },            
+            { path: 'esqueci-senha', component: EsqueciSenhaComponent },
+            { path: 'recuperar-senha', component: RedefinirSenhaComponent },
+            { path: 'confirmar-email', component: ConfirmarEmailComponent }
         ]
     },
     {
@@ -30,10 +33,7 @@ export const routes: Routes = [
             { path: 'biblioteca', component: Biblioteca},
             { path: 'meus-projetos', component: MeusProjetos},
             { path: 'schedule', component: ScheduleComponent },
-            { path : 'usuario', component: Usuario},
-            { path: 'confirmar-email', component: ConfirmarEmailComponent },
-            { path: 'esqueci-senha', component: EsqueciSenhaComponent },
-            { path: 'recuperar-senha', component: RedefinirSenhaComponent }
+            { path : 'usuario', component: Usuario}
         ]
     },
 ];

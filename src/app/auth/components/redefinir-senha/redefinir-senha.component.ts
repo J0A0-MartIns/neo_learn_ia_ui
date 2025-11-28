@@ -19,7 +19,7 @@ export const passwordMatchValidator = (control: AbstractControl): ValidationErro
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './redefinir-senha.component.html',
-  styleUrls: ['./redefinir-senha.component.scss']
+  styleUrls: ['../login/login.component.scss']
 })
 export class RedefinirSenhaComponent implements OnInit {
   resetForm!: FormGroup;
