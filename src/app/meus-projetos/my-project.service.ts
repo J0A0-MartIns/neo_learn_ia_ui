@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StudyProject } from '../shared/models/responseFindAllProjects';
-
+import { safeLocalStorageGet} from "../shared/storage.util";
 
 export interface ProjectCreateData {
     name: string;
@@ -20,7 +20,7 @@ export class MyProjectService {
     constructor(private http: HttpClient) { }
 
     create(request: ProjectCreateData): Observable<any> {
-        const token = localStorage.getItem('auth_token') || '';
+        const token = safeLocalStorageGet('auth_token') || '';
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
