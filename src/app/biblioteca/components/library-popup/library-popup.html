@@ -9,21 +9,24 @@
                 <h2 class="docs-title">Documentos contidos</h2>
 
                 <div class="documents-grid">
-                    <ng-container *ngFor="let d of docs">
-                        <div class="doc-card">
+                    <ng-container *ngFor="let file of docs">
+                        <div class="doc-card" (click)="openFile(file)">
                             <svg class="doc-icon" viewBox="0 0 24 24">
                                 <path fill="none" stroke="#023535" stroke-width="1.6"
                                       d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
                                 <path fill="none" stroke="#023535" stroke-width="1.6"
                                       d="M14 3v6h6"/>
                             </svg>
-                            <div class="doc-name">NOMEARQUIVO.PDF</div>
-                            <div class="doc-type">{{d}}</div>
+
+                            <div class="doc-name">{{ file.fileName }}</div>
+                            <div class="doc-type">{{ file.fileType }}</div>
                         </div>
                     </ng-container>
                 </div>
 
-                <button class="download-all"><i class="fa-solid fa-arrow-down"></i>Baixar tudo</button>
+                <button class="download-all" (click)="downloadAll()">
+                    <i class="fa-solid fa-arrow-down"></i> Baixar tudo
+                </button>
             </div>
 
             <div class="right-panel">
