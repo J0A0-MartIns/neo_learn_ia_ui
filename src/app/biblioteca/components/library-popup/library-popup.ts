@@ -10,9 +10,10 @@ import { CommonModule} from "@angular/common";
 })
 export class LibraryPopupComponent {
 
-  @Input() isOpen: boolean = false;
-  @Output() close = new EventEmitter<void>();
-  @Output() addProject = new EventEmitter<void>();
+    @Input() project: any;
+    @Input() isOpen: boolean = false;
+    @Output() close = new EventEmitter<void>();
+    @Output() addProject = new EventEmitter<void>();
 
   docs: string[] = [
     'Edital','Edital','Edital',
