@@ -37,6 +37,12 @@
         </div>
 
         <div class="footer-actions">
+            <button class="btn-action" (click)="togglePublic()">
+                {{ projeto?.isPublic ? 'Privar' : 'Publicar' }}
+                <mat-icon>
+                    {{ projeto?.isPublic ? 'lock' : 'public' }}
+                </mat-icon>
+            </button>
             <button class="btn-action" (click)="abrirCronograma()">
                 Cronograma <mat-icon>calendar_today</mat-icon>
             </button>
