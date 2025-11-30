@@ -2,7 +2,7 @@
     <div class="modal">
         <button class="close" (click)="closePopup()"><i class="fa-solid fa-xmark"></i></button>
 
-        <h1 class="project-title">NOME DO PROJETO PÚBLICO</h1>
+        <h1 class="project-title">{{ project?.name }}</h1>
 
         <div class="content">
             <div class="left-panel">
@@ -27,23 +27,18 @@
             </div>
 
             <div class="right-panel">
-                <p class="description">
-                    DESCRIÇÃO PROJETO DESCRIÇÃO PROJETO DESCRIÇÃO PROJETO...
-                </p>
-
-                <p class="meta">
-                    Concurso: Banco do Brasil<br>
-                    Matérias: Matemática, Conhecimentos Bancários e Português<br>
-                    Disponibilizado em 20/09/2025 às 15h01
-                </p>
-
                 <div class="author">
                     <div class="avatar"></div>
                     <div class="author-info">
                         <div class="author-label">Autor:</div>
-                        <div class="author-name">NOME DO ATOR</div>
+                        <div class="author-name">{{ project?.ownerName }}</div>
                     </div>
                 </div>
+
+                <p class="description">
+                    {{ project?.description || 'Sem descrição disponível.' }}
+                </p>
+
             </div>
         </div>
 

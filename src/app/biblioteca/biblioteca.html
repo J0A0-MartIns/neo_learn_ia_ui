@@ -1,11 +1,17 @@
 <app-search-bar></app-search-bar>
 
-<app-project-card-library (open)="openPopup()"></app-project-card-library>
+<div class="cards-grid">
+    <app-project-card-library
+            *ngFor="let project of projects"
+            [project]="project"
+            (open)="openPopup(project)">
+    </app-project-card-library>
+</div>
 
 <app-library-popup
         [isOpen]="popupOpen"
+        [project]="selectedProject"
         (close)="closePopup()"
-        (addProject)="openSuccessPopup()"
 ></app-library-popup>
 
 <app-success-popup

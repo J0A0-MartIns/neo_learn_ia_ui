@@ -47,5 +47,12 @@ export class MyProjectService {
         return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project`, { headers });
     }
 
+    getPublicLibrary(): Observable<any> {
+        const token = localStorage.getItem('auth_token') || '';
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
 
+        return this.http.get(`${this.apiUrl}/study-project/public-library`, { headers });
+    }
 }
