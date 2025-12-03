@@ -1,0 +1,217 @@
+.dialog-container {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  background-color: #fff;
+  padding: 25px;
+  box-sizing: border-box;
+  min-height: 500px;
+
+  .left, .right {
+    flex: 1;
+    padding: 10px;
+  }
+
+  /* === LADO ESQUERDO === */
+  .left {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+      text-align: center;
+
+      h2 {
+        display: inline-block;
+        margin-bottom: 10px;
+        color: #333;
+        border-bottom: 3px solid #ffcdd2; /* Linha rosa */
+        padding-bottom: 2px;
+      }
+
+      .metadata {
+        font-size: 11px;
+        color: #666;
+        margin-bottom: 10px;
+        p { margin: 2px 0; }
+      }
+
+      .tags {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 20px;
+
+        .tag {
+          background: #f0f0f0;
+          border: 1px solid #ccc;
+          padding: 2px 10px;
+          border-radius: 4px;
+          font-size: 11px;
+          color: #555;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .description-section {
+      text-align: center;
+      margin-bottom: 20px;
+
+      h4 {
+        font-size: 14px;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      .desc-text {
+        font-size: 12px;
+        color: #777;
+        line-height: 1.4;
+        max-width: 80%;
+        margin: 0 auto;
+        word-wrap: break-word;
+      }
+    }
+
+    .metrics {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: auto;
+      margin-top: 20px;
+
+      .metric-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .circle {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: #dcedc8; /* Verde bem claro */
+          color: #33691e;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 5px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        span {
+          font-size: 10px;
+          font-weight: bold;
+          color: #555;
+        }
+      }
+    }
+
+    .footer-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+
+      .btn-action {
+        background-color: #e1f5fe; /* Azul bem claro */
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #444;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: background 0.2s;
+
+        &:hover {
+          background-color: #b3e5fc;
+        }
+
+        &:last-child {
+          background-color: #f0f4c3;
+          &:hover { background-color: #e6ee9c; }
+        }
+        &:nth-child(1), &:nth-child(2) {
+          background-color: #f0f4c3;
+          &:hover { background-color: #e6ee9c; }
+        }
+
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  /* === LADO DIREITO === */
+  .right {
+    border-left: 1px solid #e0e0e0;
+    padding-left: 25px;
+
+    .content-header {
+      display: flex;
+      align-items: center;
+      border-bottom: 3px solid #ffcdd2;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+
+      .filter-btn {
+        background-color: #80cbc4;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        font-size: 11px;
+        font-weight: bold;
+        color: #fff;
+        cursor: pointer;
+        margin-right: 15px;
+
+        mat-icon {
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+          margin-left: 4px;
+        }
+      }
+
+      h3 {
+        flex-grow: 1;
+        text-align: center;
+        margin: 0;
+        font-size: 16px;
+        color: #555;
+        padding-right: 60px;
+      }
+    }
+
+    .document-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .doc-item {
+        padding: 15px;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #006064;
+        background-color: #00bcd4; /* Ciano (Impar) */
+
+        &.even {
+          background-color: #dce775; /* Verde Limão */
+          color: #33691e;
+        }
+      }
+    }
+  }
+}

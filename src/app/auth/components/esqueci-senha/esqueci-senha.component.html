@@ -1,0 +1,34 @@
+<div class="login-container">
+  
+  <div class="form-panel">
+    <div class="form-content">
+      <header class="form-header">
+        <img src="assets/logo.png" alt="NeoLearnIA Logo" class="logo">
+        <h2>Recuperar Senha</h2>
+        <p class="instruction-text">Informe seu email para receber o link de redefinição.</p>
+      </header>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="email" placeholder="seu@email.com" [disabled]="loading">
+      </div>
+
+      <button class="submit-btn" (click)="enviarEmail()" [disabled]="loading || !email">
+        {{ loading ? 'Enviando...' : 'Enviar Link →' }}
+      </button>
+      <p *ngIf="mensagem" [class]="sucesso ? 'msg-sucesso' : 'msg-erro'">
+        {{ mensagem }}
+      </p>
+      <br>
+      <br>
+      <a routerLink="/login">Voltar para Login</a>
+    </div>
+  </div>
+  <div class="info-panel">
+    <div class="info-content">
+      <h1>NeoLearnIA</h1>
+      <p class="welcome-text">Esqueceu a senha?</p>      
+      <p class="subtitle">Não se preocupe, vamos ajudá-lo a recuperar o acesso.</p>
+    </div>
+  </div>
+
+</div>

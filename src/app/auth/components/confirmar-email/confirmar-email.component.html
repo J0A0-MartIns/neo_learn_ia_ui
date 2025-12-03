@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="card" *ngIf="loading">
+    <h2>Processando...</h2>
+    <p>Estamos validando seu email.</p>
+  </div>
+
+  <div class="card sucesso" *ngIf="!loading && sucesso">
+    <h2>Email Confirmado! ✅</h2>
+    <p>{{ mensagem }}</p>
+    <button routerLink="/login">Ir para Login</button>
+  </div>
+
+  <div class="card erro" *ngIf="!loading && !sucesso">
+    <h2>Ops! ❌</h2>
+    <p>{{ mensagem }}</p>
+    <button routerLink="/login">Voltar</button>
+  </div>
+</div>

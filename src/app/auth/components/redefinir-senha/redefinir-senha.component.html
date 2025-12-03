@@ -1,0 +1,69 @@
+<div class="login-container">
+  
+  <div class="form-panel">
+    <div class="form-content">
+      
+      <header class="form-header">
+        <img src="assets/logo.png" alt="NeoLearnIA Logo" class="logo">
+        <h2>Redefinir Senha</h2>
+        <p class="instruction-text">Crie uma nova senha segura para sua conta.</p>
+      </header>
+
+      <div *ngIf="!token" class="msg erro">
+        Token inválido ou não encontrado na URL.
+      </div>
+
+      <form [formGroup]="resetForm" (ngSubmit)="onSubmit()" *ngIf="token && !sucesso">
+        
+        <div class="input-group">
+          <label for="password">Nova Senha</label>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password" 
+            placeholder="Mínimo 6 caracteres"
+            [class.invalid]="resetForm.get('password')?.invalid && resetForm.get('password')?.touched"
+          >
+          <span class="error-text" *ngIf="resetForm.get('password')?.hasError('minlength') && resetForm.get('password')?.touched">
+            A senha deve ter pelo menos 6 caracteres.
+          </span>
+        </div>
+
+        <div class="input-group">
+          <label for="confirmPassword">Confirmar Senha</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            formControlName="confirmPassword" 
+            placeholder="Repita a nova senha"
+            [class.invalid]="resetForm.errors?.['mismatch'] && resetForm.get('confirmPassword')?.touched"
+          >
+          <span class="error-text" *ngIf="resetForm.errors?.['mismatch'] && resetForm.get('confirmPassword')?.touched">
+            As senhas não coincidem.
+          </span>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="resetForm.invalid || loading">
+          {{ loading ? 'Salvando...' : 'Redefinir Senha' }}
+        </button>
+
+      </form>
+
+      <p *ngIf="mensagem" [class]="sucesso ? 'msg-sucesso' : 'msg-erro'">
+        {{ mensagem }}
+      </p>
+
+      <a routerLink="/login" class="back-link">Voltar para Login</a>
+
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <div class="info-content">
+      <h1>NeoLearnIA</h1>
+      <p class="welcome-text">Segurança em primeiro lugar</p>      
+      <p class="subtitle">Sua nova senha garantirá o acesso aos seus estudos.</p>
+    </div>
+  </div>
+
+</div>

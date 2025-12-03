@@ -1,0 +1,79 @@
+@import '../../../assets/colors';
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.search-container {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #e5e7eb;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  flex: 1;
+  transition: background 0.2s;
+  border: 2px solid $verde-escuro;
+}
+
+.search-box:hover {
+  background: #d1d5db;
+}
+
+.search-box i {
+  color: $verde-escuro;
+  margin-right: 8px;
+}
+
+.search-box input::placeholder {
+  color: $verde-escuro;
+  opacity: 1;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #1f2937;
+}
+
+.icon-btn {
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.icon-btn:hover {
+  background-color: #e5e7eb;
+}
+
+.icon-btn i {
+  color: $verde-escuro;
+  font-size: 20px;
+}
+
+.sort-wrapper {
+  position: relative;
+}
+
+.sort-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 20;
+}
