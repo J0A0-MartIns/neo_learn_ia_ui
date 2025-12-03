@@ -11,10 +11,6 @@
                 <i class="fa-solid fa-user"></i>
             </a>
 
-            <a routerLink="#" class="icon-link">
-                <i class="fa-solid fa-gear"></i>
-            </a>
-
             <a (click)="onLogout()" class="icon-link logout-btn" title="Sair do Sistema">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
@@ -26,7 +22,7 @@
         <a routerLink="/biblioteca" routerLinkActive="active" class="link-menu">BIBLIOTECA</a>
         <a routerLink="/meus-projetos" routerLinkActive="active" class="link-menu">MEUS PROJETOS</a>
         <a routerLink="/schedule" routerLinkActive="active" class="link-menu">CRONOGRAMA</a>
-        <a [routerLink]="['/quiz']" routerLinkActive="active" class="link-menu">QUESTOES</a>
+        <a [routerLink]="['/quiz']" routerLinkActive="active" class="link-menu">QUESTÕES</a>
     </div>
 
 </header>
