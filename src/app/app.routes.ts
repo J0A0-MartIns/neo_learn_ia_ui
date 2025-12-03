@@ -9,6 +9,9 @@ import { Biblioteca } from './biblioteca/biblioteca'
 import { Usuario } from './usuario/usuario';
 import { ScheduleComponent } from './schedule/schedule-component';
 import {QuizComponent} from "./quiz/quiz.component";
+import { EsqueciSenhaComponent } from "./auth/components/esqueci-senha/esqueci-senha.component";
+import { RedefinirSenhaComponent } from "./auth/components/redefinir-senha/redefinir-senha.component";
+import { ConfirmarEmailComponent } from "./auth/components/confirmar-email/confirmar-email.component";
 
 export const routes: Routes = [
     { path: '',
