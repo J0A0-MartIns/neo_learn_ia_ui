@@ -35,7 +35,7 @@ export class MeusProjetos implements OnInit {
     }
 
   loadProjects() {
-    this.service.findAllList().subscribe({
+    this.service.findMyProjects().subscribe({
       next: (response) => {
         console.log('Dados Carregados: ', response);
         this.projects = response;
