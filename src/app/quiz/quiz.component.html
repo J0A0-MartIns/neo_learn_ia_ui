@@ -1,0 +1,46 @@
+<div *ngIf="!selectedQuiz && !finished">
+    <h2>Quizzes Disponíveis</h2>
+
+    <div class="quiz-item" *ngFor="let quiz of quizzes">
+        <h3>{{ quiz.title }}</h3>
+        <p>{{ quiz.description }}</p>
+
+        <button (click)="openQuiz(quiz.id)">Iniciar Quiz</button>
+    </div>
+</div>
+
+<div *ngIf="selectedQuiz && !finished">
+    <h2>{{ selectedQuiz?.title }}</h2>
+
+    <div class="question" *ngFor="let q of selectedQuiz?.questions">
+        <h3>{{ q.text }}</h3>
+
+        <div
+                class="option"
+                *ngFor="let opt of q.options"
+                [class.selected]="answers.get(q.id) === opt.id"
+                (click)="selectAnswer(q.id, opt.id)"
+        >
+            {{ opt.text }}
+        </div>
+    </div>
+
+    <button class="finish" (click)="finishQuiz()">Finalizar Quiz</button>
+    <button class="back" (click)="backToList()">Voltar</button>
+</div>
+
+<div *ngIf="finished" class="result-container">
+    <h2>Resultado do Quiz</h2>
+
+    <div class="score">
+        <p class="correct">Acertos: {{ correctAnswers }}</p>
+        <p class="total">Total: {{ selectedQuiz?.questions?.length }}</p>
+    </div>
+
+    <div class="actions">
+        <button class="back" (click)="backToList()">Voltar</button>
+        <button class="finish" (click)="retryQuiz()">Refazer Quiz</button>
+    </div>
+</div>
+
+

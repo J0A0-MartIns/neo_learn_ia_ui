@@ -48,7 +48,8 @@ export class ProjectDetailsDialogComponent {
     ) {
         this.form = this.fb.group({
             name: ['', Validators.required],
-            description: ['']
+            description: [''],
+            is_public: [false]
         });
     }
 
@@ -77,7 +78,7 @@ export class ProjectDetailsDialogComponent {
             this.dialogRef.close(project);
             this.service.create(project).subscribe({
                 next: (response) => {
-                    console.log('Login bem-sucedido!', response);
+                    console.log('Projeto criado com sucesso!', response);
                     this.snackBar.open('Projeto criado com sucesso!', '', {
                         duration: 2000,
                         verticalPosition: 'top',
