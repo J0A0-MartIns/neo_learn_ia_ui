@@ -48,8 +48,7 @@ export class ProjectDetailsDialogComponent {
     ) {
         this.form = this.fb.group({
             name: ['', Validators.required],
-            description: [''],
-            is_public: [false]
+            description: ['']
         });
     }
 
