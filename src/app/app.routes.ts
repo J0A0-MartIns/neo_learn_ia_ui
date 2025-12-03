@@ -11,13 +11,18 @@ import { ScheduleComponent } from './schedule/schedule-component';
 import {QuizComponent} from "./quiz/quiz.component";
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '',
+        loadComponent: () => import('./landing/landing.component').then(m => m.LandingComponent)
+     },
     {
         path: '',
         component: BlankLayout,
         children: [
             { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegistrarComponent }
+            { path: 'register', component: RegistrarComponent },            
+            { path: 'esqueci-senha', component: EsqueciSenhaComponent },
+            { path: 'recuperar-senha', component: RedefinirSenhaComponent },
+            { path: 'confirmar-email', component: ConfirmarEmailComponent }
         ]
     },
     {
@@ -33,3 +38,4 @@ export const routes: Routes = [
         ]
     },
 ];
+

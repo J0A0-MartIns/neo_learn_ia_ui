@@ -15,11 +15,13 @@
             <span class="plus-icon">+</span>
         </button>
     </div>
+
     <div class="project-grid">
         <app-project-card
-            *ngFor="let project of projects"
-            [projectData]="project">
+                *ngFor="let project of projects"
+                [projectData]="project"
+                (click)="openViewModal(project)"
+                style="cursor: pointer;">
         </app-project-card>
     </div>
 </div>
-

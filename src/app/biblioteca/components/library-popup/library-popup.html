@@ -1,0 +1,50 @@
+<div class="overlay" *ngIf="isOpen">
+    <div class="modal">
+        <button class="close" (click)="closePopup()"><i class="fa-solid fa-xmark"></i></button>
+
+        <h1 class="project-title">{{ project?.name }}</h1>
+
+        <div class="content">
+            <div class="left-panel">
+                <h2 class="docs-title">Documentos contidos</h2>
+
+                <div class="documents-grid">
+                    <ng-container *ngFor="let file of docs">
+                        <div class="doc-card" (click)="openFile(file)">
+                            <svg class="doc-icon" viewBox="0 0 24 24">
+                                <path fill="none" stroke="#023535" stroke-width="1.6"
+                                      d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                                <path fill="none" stroke="#023535" stroke-width="1.6"
+                                      d="M14 3v6h6"/>
+                            </svg>
+
+                            <div class="doc-name">{{ file.fileName }}</div>
+                            <div class="doc-type">{{ file.fileType }}</div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <button class="download-all" (click)="downloadAll()">
+                    <i class="fa-solid fa-arrow-down"></i> Baixar tudo
+                </button>
+            </div>
+
+            <div class="right-panel">
+                <div class="author">
+                    <div class="avatar"></div>
+                    <div class="author-info">
+                        <div class="author-label">Autor:</div>
+                        <div class="author-name">{{ project?.ownerName }}</div>
+                    </div>
+                </div>
+
+                <p class="description">
+                    {{ project?.description || 'Sem descrição disponível.' }}
+                </p>
+
+            </div>
+        </div>
+
+        <button class="add-project" (click)="onAddProject()"><i class="fa-solid fa-plus"></i>Adicionar projeto</button>
+    </div>
+</div>
