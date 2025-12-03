@@ -52,4 +52,17 @@ export class Biblioteca implements OnInit {
     closeSuccessPopup() {
         this.successOpen = false;
     }
+
+    duplicateSelectedProject() {
+        if (!this.selectedProject) return;
+
+        this.service.duplicateProject(this.selectedProject.id).subscribe({
+            next: () => {
+                this.openSuccessPopup();
+            },
+            error: (err) => {
+                console.error("Erro ao duplicar projeto", err);
+            }
+        });
+    }
 }

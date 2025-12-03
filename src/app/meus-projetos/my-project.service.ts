@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StudyProject } from '../shared/models/responseFindAllProjects';
 import { safeLocalStorageGet} from "../shared/storage.util";
+import {environment} from "../environment/environment";
 
 export interface ProjectCreateData {
     name: string;
@@ -54,5 +55,14 @@ export class MyProjectService {
         });
 
         return this.http.get(`${this.apiUrl}/study-project/public-library`, { headers });
+    }
+
+    duplicateProject(projectId: number) {
+        const token = safeLocalStorageGet('auth_token') || '';
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        return this.http.post(`${environment.apiUrl}/study-project/${projectId}/duplicate`, {}, { headers });
     }
 }

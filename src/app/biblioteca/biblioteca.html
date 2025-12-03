@@ -12,6 +12,7 @@
         [isOpen]="popupOpen"
         [project]="selectedProject"
         (close)="closePopup()"
+        (addProject)="duplicateSelectedProject()"
 ></app-library-popup>
 
 <app-success-popup
