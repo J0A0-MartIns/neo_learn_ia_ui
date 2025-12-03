@@ -40,12 +40,12 @@ export class MyProjectService {
         return this.http.post(`${this.apiUrl}/study-project`, formData, { headers });
     }
 
-    findAllList(): Observable<any> {
+    findMyProjects(): Observable<any> {
         const token = localStorage.getItem('auth_token') || '';
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
-        return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project`, { headers });
+        return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project/my-projects`, { headers });
     }
 
     getPublicLibrary(): Observable<any> {
