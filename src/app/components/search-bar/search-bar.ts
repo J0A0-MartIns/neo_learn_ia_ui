@@ -10,30 +10,34 @@ import { LibrarySort} from "./components/library-sort/library-sort";
   styleUrls: ['./search-bar.scss']
 })
 export class SearchBar {
-  isSortOpen = false;
+    isSortOpen = false;
 
-  toggleSort() {
-    this.isSortOpen = !this.isSortOpen;
-  }
+    toggleSort() {
+        this.isSortOpen = !this.isSortOpen;
+    }
 
-  closeSort() {
-    this.isSortOpen = false;
-  }
+    closeSort() {
+        this.isSortOpen = false;
+    }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-      const target = event.target as HTMLElement;
-      const clickedInsideButton = target.closest('.icon-btn');
-      const clickedInsideDropdown = target.closest('.sort-dropdown');
-      if (!clickedInsideButton && !clickedInsideDropdown) {
-          this.closeSort();
-      }
-  }
+    @HostListener('document:click', ['$event'])
+    onDocumentClick(event: MouseEvent) {
+        const target = event.target as HTMLElement;
+        const clickedInsideButton = target.closest('.icon-btn');
+        const clickedInsideDropdown = target.closest('.sort-dropdown');
+        if (!clickedInsideButton && !clickedInsideDropdown) {
+            this.closeSort();
+        }
+    }
 
-  @Output() search = new EventEmitter<string>();
-
-  onSearch(event: any) {
+    @Output() search = new EventEmitter<string>();
+    onSearch(event: any) {
         const text = event.target.value;
         this.search.emit(text);
-  }
+    }
+
+    @Output() sort = new EventEmitter<string>();
+    applySort(type: string) {
+        this.sort.emit(type);
+    }
 }

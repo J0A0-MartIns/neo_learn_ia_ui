@@ -79,4 +79,26 @@ export class Biblioteca implements OnInit {
             (p.ownerName && p.ownerName.toLowerCase().includes(query))
         );
     }
+
+    sortProjects(type: string) {
+        if (type === 'az') {
+            this.projects.sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        if (type === 'za') {
+            this.projects.sort((a, b) => b.name.localeCompare(a.name));
+        }
+
+        if (type === 'newest') {
+            this.projects.sort((a, b) =>
+                new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+        }
+
+        if (type === 'oldest') {
+            this.projects.sort((a, b) =>
+                new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+        }
+    }
 }
