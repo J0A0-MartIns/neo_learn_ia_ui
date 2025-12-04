@@ -1,2 +1,29 @@
-<app-search-bar></app-search-bar>
-<app-project-card-library></app-project-card-library>
+<app-search-bar
+    (search)="filterProjects($event)"
+    (sort)="sortProjects($event)"
+></app-search-bar>
+
+<div *ngIf="projects.length === 0" class="empty-state">
+    <img src="assets/empty.svg" alt="Nenhum projeto" class="empty-image" />
+    <p class="empty-message">Sem projetos públicos no momento</p>
+</div>
+
+<div class="cards-grid">
+    <app-project-card-library
+            *ngFor="let project of projects"
+            [project]="project"
+            (open)="openPopup(project)">
+    </app-project-card-library>
+</div>
+
+<app-library-popup
+        [isOpen]="popupOpen"
+        [project]="selectedProject"
+        (close)="closePopup()"
+        (addProject)="duplicateSelectedProject()"
+></app-library-popup>
+
+<app-success-popup
+        [isOpen]="successOpen"
+        (close)="closeSuccessPopup()"
+></app-success-popup>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { firstValueFrom, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StudyProject } from '../shared/models/responseFindAllProjects';
-
+import { safeLocalStorageGet } from "../shared/storage.util";
+import { environment } from "../environment/environment";
 
 export interface ProjectCreateData {
     name: string;
@@ -20,7 +21,7 @@ export class MyProjectService {
     constructor(private http: HttpClient) { }
 
     create(request: ProjectCreateData): Observable<any> {
-        const token = localStorage.getItem('auth_token') || '';
+        const token = safeLocalStorageGet('auth_token') || '';
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
@@ -39,13 +40,24 @@ export class MyProjectService {
         return this.http.post(`${this.apiUrl}/study-project`, formData, { headers });
     }
 
-    findAllList(): Observable<any> {
+    findMyProjects(): Observable<any> {
         const token = localStorage.getItem('auth_token') || '';
         const headers = new HttpHeaders({
             'Authorization': `Bearer ${token}`
         });
-        return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project`, { headers });
+        return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project/my-projects`, { headers });
     }
+
+    getPublicLibrary(): Observable<any> {
+        const token = localStorage.getItem('auth_token') || '';
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
+
+        return this.http.get(`${this.apiUrl}/study-project/public-library`, { headers });
+    }
+
+
 
     findAllListforShedule(): Observable<any> {
         const token = localStorage.getItem('auth_token') || '';
@@ -54,6 +66,4 @@ export class MyProjectService {
         });
         return this.http.get<StudyProject[]>(`${this.apiUrl}/study-project/projects-for-shedule`, { headers });
     }
-
-
 }

@@ -92,3 +92,66 @@ h2 {
     border-color: #f5c6cb;
   }
 }
+
+.email-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  
+  input {
+    width: 100%;
+  }
+
+  .info-icon {
+    margin-left: 10px;
+    cursor: help;
+    font-size: 1.2rem;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn-salvar {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #2c6ecb;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) {
+    background: #1e54a4;
+  }
+  
+  &:disabled {
+    background: #ccc;
+    cursor: wait;
+  }
+}
+
+.btn-senha {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #dc3545; /* Borda vermelha para indicar área sensível */
+  background: transparent;
+  color: #dc3545;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background: #dc3545;
+    color: white;
+  }
+}

@@ -15,11 +15,18 @@
             <span class="plus-icon">+</span>
         </button>
     </div>
+
+    <div *ngIf="projects.length === 0" class="empty-state">
+        <img src="assets/empty.svg" alt="Nenhum projeto" class="empty-image" />
+        <p class="empty-message">Sem projetos no momento</p>
+    </div>
+
     <div class="project-grid">
         <app-project-card
-            *ngFor="let project of projects"
-            [projectData]="project">
+                *ngFor="let project of projects"
+                [projectData]="project"
+                (click)="openViewModal(project)"
+                style="cursor: pointer;">
         </app-project-card>
     </div>
 </div>
-

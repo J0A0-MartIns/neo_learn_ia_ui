@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-project-card-library',
@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class ProjectCardLibrary {
 
+    @Input() project: any;
+    @Output() open = new EventEmitter<void>();
+
+  onOpen() {
+    this.open.emit();
+  }
 }

@@ -12,6 +12,7 @@
   gap: 8px;
   width: 100%;
   max-width: 600px;
+  position: relative;
 }
 
 .search-box {
@@ -64,4 +65,15 @@
 .icon-btn i {
   color: $verde-escuro;
   font-size: 20px;
+}
+
+.sort-wrapper {
+  position: relative;
+}
+
+.sort-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 20;
 }
