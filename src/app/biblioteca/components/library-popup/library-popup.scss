@@ -14,8 +14,8 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  z-index: 1000;  /* atrás */
-  pointer-events: auto; /* permite cliques dentro da modal */
+  z-index: 1000;
+  pointer-events: auto;
 }
 
 .overlay * {

@@ -3,6 +3,11 @@
     (sort)="sortProjects($event)"
 ></app-search-bar>
 
+<div *ngIf="projects.length === 0" class="empty-state">
+    <img src="assets/empty.svg" alt="Nenhum projeto" class="empty-image" />
+    <p class="empty-message">Sem projetos públicos no momento</p>
+</div>
+
 <div class="cards-grid">
     <app-project-card-library
             *ngFor="let project of projects"
