@@ -57,7 +57,14 @@ export class MyProjectService {
         return this.http.get(`${this.apiUrl}/study-project/public-library`, { headers });
     }
 
+    duplicateProject(projectId: number) {
+        const token = safeLocalStorageGet('auth_token') || '';
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`
+        });
 
+        return this.http.post(`${environment.apiUrl}/study-project/${projectId}/duplicate`, {}, { headers });
+    }
 
     findAllListforShedule(): Observable<any> {
         const token = localStorage.getItem('auth_token') || '';
