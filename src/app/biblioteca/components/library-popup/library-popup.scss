@@ -9,20 +9,27 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, .55);
+  background: rgba($preto, .55);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  z-index: 1000;  /* atrás */
+  pointer-events: auto; /* permite cliques dentro da modal */
+}
+
+.overlay * {
+  pointer-events: auto;
 }
 
 .modal {
   position: relative;
+  z-index: 1100;
   background: $branco;
   border-radius: 12px;
   width: 1160px;
   padding: 28px 32px 60px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+  box-shadow: 0 8px 24px $preto;
 }
 
 .close {
@@ -59,12 +66,13 @@
 }
 
 .left-panel {
-  background: #D2E8E3;
+  background: rgba($verde-escuro, 0.3);
   width: 560px;
   height: 428px;
   border-radius: 8px;
   padding: 20px;
   box-sizing: border-box;
+
   display: flex;
   flex-direction: column;
 }
@@ -77,18 +85,46 @@
 }
 
 .documents-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, 147px);
   grid-auto-rows: 86px;
   gap: 20px;
+
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba($verde-escuro, 0.45) transparent;
+}
+
+.documents-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.documents-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.documents-grid::-webkit-scrollbar-thumb {
+  background: rgba($verde-escuro, 0.45);
+  border-radius: 4px;
+}
+
+.documents-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba($verde-escuro, 0.65);
 }
 
 .doc-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  height: 100px;
+  padding-top: 6px;
+  overflow: hidden;
 }
 
 .doc-icon {
@@ -101,11 +137,24 @@
   font-size: 12px;
   font-weight: 700;
   color: $verde-escuro;
+
+  max-width: 120px;
+
+  white-space: normal;
+  text-align: center;
+  word-break: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .doc-type {
   font-size: 12px;
   color: $verde-escuro;
+  height: 14px;
+  line-height: 14px;
 }
 
 .download-all {
@@ -135,8 +184,23 @@
   padding-top: 6px;
 }
 
-.description {
-  margin: 0 0 12px;
+.description-block {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.description-label {
+  font-weight: 700;
+  font-size: 16px;
+  color: $verde-escuro;
+}
+
+.description-text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: $preto;
 }
 
 .meta {
@@ -154,10 +218,15 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #D9D9D9;
+  background: rgba($preto, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
+
+  i {
+    font-size: 22px;
+    color: $verde-escuro;
+  }
 }
 
 .author-info {
@@ -191,6 +260,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1200;
+  pointer-events: auto;
 
   i {
     font-size: 20px;
