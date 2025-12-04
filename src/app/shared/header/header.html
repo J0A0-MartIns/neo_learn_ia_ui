@@ -17,6 +17,31 @@
         </nav>
     </div>
 
+    <div class="carousel">        
+        <div class="slides-container">
+            <div 
+                class="slide" 
+                *ngFor="let slide of slides; let i = index"
+                [class.active]="i === currentSlide"
+                [style.backgroundImage]="'url(' + slide.url + ')'">
+                <div class="slide-content" *ngIf="slide.title">
+                    <h2>{{ slide.title }}</h2>
+                </div>
+                <div class="overlay"></div>
+            </div>
+        </div>
+        <button class="nav-btn prev" (click)="prevSlide()">&#10094;</button>
+        <button class="nav-btn next" (click)="nextSlide()">&#10095;</button>
+        <div class="carousel-dots">
+            <span 
+                *ngFor="let slide of slides; let i = index" 
+                class="dot" 
+                [class.active]="i === currentSlide"
+                (click)="goToSlide(i)">
+            </span>
+        </div>
+    </div>
+
     <div class="container-menu">
         <a routerLink="/inicio" routerLinkActive="active" class="link-menu">INÍCIO</a>
         <a routerLink="/biblioteca" routerLinkActive="active" class="link-menu">BIBLIOTECA</a>
