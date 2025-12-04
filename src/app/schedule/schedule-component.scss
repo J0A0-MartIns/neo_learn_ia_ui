@@ -1,10 +1,4 @@
-$verde-escuro: #023535;
-$verde-claro: #CCEA8D;
-$verde-azulado: #0FC2C0;
-$branco: #FFFFFF;
-$preto: #000000;
-$vermelho: #800000;
-
+@import '../../assets/colors.scss';
 .schedule-container {
   padding: 20px;
   background: $verde-escuro;
@@ -225,4 +219,91 @@ $vermelho: #800000;
   &:hover {
     background-color: darken($verde-claro, 10%);
   }
+}
+
+.view-schedule-card {
+
+  max-width: 700px; 
+  
+  @media (max-width: 768px) {
+    max-width: 100%; 
+  }
+
+  .mat-mdc-table {
+    width: 100%; 
+    
+    .mat-mdc-header-row {
+      background-color: lighten($verde-escuro, 40%); 
+    }
+
+    .mat-mdc-cell, .mat-mdc-header-cell {
+      padding: 10px 18px; 
+    }
+  }
+
+  .mat-column-actions {
+    width: 100px; 
+    text-align: center;
+    
+    button[aria-label="Ver Cronograma"] {
+      color: $verde-escuro; 
+      
+      &:hover {
+        background-color: rgba($verde-escuro, 0.1);
+      }
+    }
+
+    button[aria-label="Excluir Cronograma"] {
+      color: $vermelho; 
+      
+      &:hover {
+        background-color: rgba($vermelho, 0.1);
+      }
+    }
+  }
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}
+
+.loading-overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9); 
+  z-index: 9999; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px); 
+
+  .spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #333;
+      margin: 0;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    small {
+      color: #666;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
 }

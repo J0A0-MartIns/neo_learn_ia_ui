@@ -1,31 +1,23 @@
-/* create-schedule-dialog.component.scss */
-
-// Variáveis de cor (reutilizadas do seu tema principal)
-$verde-escuro: #023535;
-$verde-claro: #CCEA8D;
-$verde-azulado: #0FC2C0;
-$branco: #FFFFFF;
-$preto: #000000;
-$vermelho: #800000;
+@import '../../../assets/colors.scss';
 
 .dialog-title {
   background-color: $verde-escuro;
   color: $verde-claro;
   padding: 15px 24px;
-  margin: -24px -24px 20px -24px; // Ajusta para preencher a largura do dialog
+  margin: -24px -24px 20px -24px; 
   font-size: 1.5em;
   font-weight: bold;
   border-bottom: 2px solid $verde-azulado;
 }
 
 .dialog-content {
-  padding-top: 0; // Remove padding extra se o título já tem o seu
+  padding-top: 0; 
 }
 
 .schedule-form {
   display: flex;
   flex-direction: column;
-  gap: 20px; // Espaçamento entre os grupos de formulário
+  gap: 20px; 
   padding: 10px 0;
 }
 
@@ -49,7 +41,7 @@ $vermelho: #800000;
   font-size: 1em;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
-  box-sizing: border-box; // Inclui padding e borda na largura total
+  box-sizing: border-box; 
 
   &:focus {
     outline: none;
@@ -63,12 +55,11 @@ $vermelho: #800000;
 }
 
 .form-select {
-  // Ajustes específicos para o select
-  appearance: none; // Remove a seta padrão do navegador
+  appearance: none; 
   background-repeat: no-repeat;
   background-position: right 10px center;
-  background-size: 12px; // Tamanho da seta
-  padding-right: 30px; // Espaço para a seta
+  background-size: 12px; 
+  padding-right: 30px; 
 }
 
 
@@ -83,7 +74,7 @@ $vermelho: #800000;
   border-top: 1px solid #eee;
   display: flex;
   justify-content: flex-end;
-  gap: 10px; // Espaço entre os botões
+  gap: 10px; 
 
   .cancel-button {
     color: #555;
@@ -93,7 +84,7 @@ $vermelho: #800000;
   }
 
   .create-button {
-    background-color: $verde-azulado; // Usando sua cor verde-azulado
+    background-color: $verde-azulado; 
     color: $branco;
     &:hover {
       background-color: darken($verde-azulado, 10%);

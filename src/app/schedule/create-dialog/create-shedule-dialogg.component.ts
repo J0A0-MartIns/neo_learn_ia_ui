@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ScheduleRequest } from '../schedule.service';
 
 interface ProjectFile {
     studyProject: number;
@@ -109,13 +110,11 @@ export class CreateScheduleDialogComponent implements OnInit {
     onSubmit(): void {
         if (this.scheduleForm.valid) {
             const formValue = this.scheduleForm.value;
-
-            
-            const result = {
+            const result : ScheduleRequest= {
                 title: formValue.title,
-                dailyHours: formValue.dailyHours,
-                totalWeeks: formValue.totalWeeks,
-                studyProject: formValue.selectedProjectId, 
+                studyTimePerDay: formValue.dailyHours,
+                weeks: formValue.totalWeeks,
+                studyProjectId: formValue.selectedProjectId, 
                 fileId: formValue.selectedFileId 
             };
 

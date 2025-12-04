@@ -6,7 +6,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { CreateScheduleDialogComponent } from './create-dialog/create-shedule-dialogg.component';
 import { MyProjectService } from '../meus-projetos/my-project.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+export interface StudySchedule {
+  id: number;
+  title: string;
+  projectName: number;
+}
 @Component({
   selector: 'app-schedule-component',
   standalone: true,
@@ -14,15 +22,22 @@ import { MyProjectService } from '../meus-projetos/my-project.service';
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './schedule-component.html',
   styleUrl: './schedule-component.scss'
 })
+
 export class ScheduleComponent implements OnInit {
   scheduleData: any;
   currentWeek: number = 1;
   projectFilesData: any[] = [];
+  schedulesList: StudySchedule[] = [];
+  displayedColumns: string[] = ['title', 'projectName', 'actions'];
+  isLoading: boolean = false;
 
   constructor(private service: ScheduleService, private dialog: MatDialog, private serviceProjects: MyProjectService) { }
 
@@ -40,10 +55,10 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProjects();
+    this.loadShedules();
   }
 
   public loadSheduleById(id: number) {
-    const scheduleId = 1;
 
     this.service.getById(id).subscribe({
       next: (response) => {
@@ -69,7 +84,20 @@ export class ScheduleComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('O dialog foi fechado. Resultado:', result);
-
+      if (result) {
+      this.isLoading = true;
+        this.service.generateShedule(result).subscribe({
+          next: (response) => {
+            console.log("Gerado com sucesso!:", response);
+            this.isLoading = false;
+            this.loadSheduleById(response);
+          },
+          error: (e) => {
+            console.error('Erro ao gerar cronograma', e);
+            this.isLoading = false;
+          }
+        });
+      }
     });
   }
   loadProjects() {
@@ -83,5 +111,29 @@ export class ScheduleComponent implements OnInit {
       }
     });
   }
+  viewSchedule(scheduleId: number) {
+    this.loadSheduleById(scheduleId);
+  }
 
+  deleteSchedule(scheduleId: number) {
+    this.service.deleleById(scheduleId).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (e) => {
+        console.error('Erro ao Deletar', e);
+      }
+    });
+  }
+  private loadShedules() {
+    this.service.getAllShedules().subscribe({
+      next: (response) => {
+        console.log('Shedules', response)
+        this.schedulesList = response;
+      },
+      error: (e) => {
+        console.error('Erro ao buscar cronogramas', e);
+      }
+    });
+  }
 }
