@@ -4,10 +4,6 @@
         <input type="text" placeholder="Pesquise por título, autor ou descrição" (input)="onSearch($event)" />
     </div>
 
-    <button class="icon-btn">
-        <i class="fas fa-filter"></i>
-    </button>
-
     <div class="sort-wrapper">
         <button class="icon-btn" (click)="toggleSort()">
             <i class="fa-solid fa-arrow-down-wide-short"></i>
@@ -16,6 +12,7 @@
         <app-library-sort
                 *ngIf="isSortOpen"
                 (close)="closeSort()"
+                (sort)="applySort($event)"
                 class="sort-dropdown"
         ></app-library-sort>
     </div>
