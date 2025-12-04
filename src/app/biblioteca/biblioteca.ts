@@ -15,6 +15,7 @@ import {MyProjectService} from "../meus-projetos/my-project.service";
   styleUrl: './biblioteca.scss'
 })
 export class Biblioteca implements OnInit {
+    allProjects: any[] = [];
     projects: any[] = [];
     selectedProject: any = null;
 
@@ -27,7 +28,10 @@ export class Biblioteca implements OnInit {
         }
 
         this.service.getPublicLibrary().subscribe({
-            next: (data) => this.projects = data
+            next: (data) => {
+                this.projects = data;
+                this.allProjects = data;
+            }
         });
     }
 
@@ -64,5 +68,15 @@ export class Biblioteca implements OnInit {
                 console.error("Erro ao duplicar projeto", err);
             }
         });
+    }
+
+    filterProjects(text: string) {
+        const query = text.toLowerCase().trim();
+
+        this.projects = this.allProjects.filter(p =>
+            p.name.toLowerCase().includes(query) ||
+            (p.description && p.description.toLowerCase().includes(query)) ||
+            (p.ownerName && p.ownerName.toLowerCase().includes(query))
+        );
     }
 }
