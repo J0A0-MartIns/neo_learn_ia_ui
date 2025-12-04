@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import {Component, EventEmitter, HostListener, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LibrarySort} from "./components/library-sort/library-sort";
 
@@ -28,5 +28,12 @@ export class SearchBar {
       if (!clickedInsideButton && !clickedInsideDropdown) {
           this.closeSort();
       }
+  }
+
+  @Output() search = new EventEmitter<string>();
+
+  onSearch(event: any) {
+        const text = event.target.value;
+        this.search.emit(text);
   }
 }
