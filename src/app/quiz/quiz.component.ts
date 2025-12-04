@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Quiz, QuizResult } from './quiz.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from './quiz.service';
 import { HttpClientModule } from '@angular/common/http';
+import { QuizQuestion } from './quiz.model';
 
 @Component({
     selector: 'app-quiz',
@@ -13,76 +14,82 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class QuizComponent implements OnInit {
 
-    quizzes: Quiz[] = [];
-    selectedQuiz?: Quiz;
-
+    projectId!: number;
+    questions: QuizQuestion[] = [];
     answers: Map<number, number> = new Map();
-
+    currentIndex = 0;
+    loading = true;
     finished = false;
     correctAnswers = 0;
 
-    constructor(private quizService: QuizService) {}
+    constructor(
+        private quizService: QuizService,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
-        this.loadQuizzes();
+        this.projectId = Number(this.route.snapshot.queryParamMap.get('projectId'));
+
+        if (!this.projectId) {
+            alert("Nenhum projeto recebido!");
+            this.router.navigate(['/']);
+            return;
+        }
+
+        this.loadQuestions();
     }
 
-    loadQuizzes() {
-        this.quizService.getAll().subscribe({
-            next: res => this.quizzes = res,
-            error: err => console.error(err)
-        });
-    }
-
-    openQuiz(id: number) {
-        this.quizService.getById(id).subscribe({
-            next: quiz => {
-                this.selectedQuiz = quiz;
-                this.answers.clear();
-                this.finished = false;
+    loadQuestions() {
+        this.quizService.generateQuestions(this.projectId).subscribe({
+            next: (data) => {
+                this.questions = data;
+                this.loading = false;
             },
-            error: err => console.error(err)
+            error: (err) => {
+                console.error(err);
+                this.loading = false;
+            }
         });
     }
 
-    selectAnswer(questionId: number, optionId: number) {
+    selectAnswer(optionId: number) {
+        const questionId = this.questions[this.currentIndex].id;
         this.answers.set(questionId, optionId);
     }
 
+    nextQuestion() {
+        if (this.currentIndex < this.questions.length - 1) {
+            this.currentIndex++;
+        }
+    }
+
+    prevQuestion() {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+        }
+    }
+
     finishQuiz() {
-        if (!this.selectedQuiz) return;
-
-        let count = 0;
-
-        this.selectedQuiz.questions.forEach(question => {
-            const selected = this.answers.get(question.id);
-            const option = question.options.find(o => o.id === selected);
-            if (option?.correct) count++;
+        let correct = 0;
+        this.questions.forEach(q => {
+            const chosen = this.answers.get(q.id);
+            const correctOpt = q.options.find(o => o.correct);
+            if (correctOpt && chosen === correctOpt.id) {
+                correct++;
+            }
         });
-
-        this.correctAnswers = count;
+        this.correctAnswers = correct;
         this.finished = true;
-
-        const result: QuizResult = {
-            quizId: this.selectedQuiz.id,
-            totalQuestions: this.selectedQuiz.questions.length,
-            correctAnswers: count
-        };
-
-        this.quizService.sendResult(result).subscribe();
     }
 
     retryQuiz() {
-        if (!this.selectedQuiz) return;
-
-        // Limpa respostas e marca como não finalizado
         this.answers.clear();
+        this.currentIndex = 0;
         this.finished = false;
-
     }
 
-    backToList() {
-        this.selectedQuiz = undefined;
-        this.finished = false;
+    backToProject() {
+        this.router.navigate(['/meus-projetos']);
     }
 }
