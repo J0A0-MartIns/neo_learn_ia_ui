@@ -1,1 +1,45 @@
-<p>Inicio</p>
+<div class="dashboard-container">
+
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+        <h3>Meu Progresso</h3>
+
+        <div class="progress-circle">
+            <svg>
+                <circle cx="60" cy="60" r="50"></circle>
+                <circle cx="60" cy="60" r="50" class="progress"></circle>
+            </svg>
+            <span>66%</span>
+        </div>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="content">
+
+        <h1>Olá, {{ userName }} 👋</h1>
+        <p>Sua jornada de estudos espera por você. Vamos lá!</p>
+
+        <div class="cards">
+
+            <!-- Card Cronograma -->
+            <div class="card">
+                <h2>Seu Cronograma</h2>
+                <p class="subtitle">Direito Penal</p>
+                <p class="hour">09:00</p>
+
+                <button class="action" (click)="goToCronograma()">IR PARA CRONOGRAMA</button>
+            </div>
+
+            <!-- Card Repositórios -->
+            <div class="card">
+                <h2>Meus Repositórios</h2>
+
+                <div class="repo-item">
+                    <span class="icon">📁</span>
+                    <span>Concursos_2024</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</div>
