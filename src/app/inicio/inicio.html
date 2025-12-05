@@ -30,13 +30,16 @@
                 <button class="action" (click)="goToCronograma()">IR PARA CRONOGRAMA</button>
             </div>
 
-            <!-- Card Repositórios -->
             <div class="card">
                 <h2>Meus Repositórios</h2>
 
-                <div class="repo-item">
+                <div *ngFor="let repo of repositories" class="repo-item">
                     <span class="icon">📁</span>
-                    <span>Concursos_2024</span>
+                    <span>{{ repo.name }}</span>
+                </div>
+
+                <div *ngIf="repositories.length === 0" class="repo-item">
+                    <span>Nenhum repositório encontrado</span>
                 </div>
             </div>
 
