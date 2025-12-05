@@ -10,4 +10,6 @@ export interface StudyProject {
   name: string;
   description: string;
   attachments: Attachment[];
+  createdAt: string;
+  isPublic: boolean;
 }
