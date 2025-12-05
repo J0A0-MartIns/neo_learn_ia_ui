@@ -1,66 +1,45 @@
-<div class="dashboard">
+<div class="dashboard-container">
 
-    <div class="header">
-        <h2>Olá XXXXXXX 👋</h2>
-        <p>Você completou 100% do seu cronograma esta semana !!</p>
-    </div>
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+        <h3>Meu Progresso</h3>
 
-    <div class="content">
+        <div class="progress-circle">
+            <svg>
+                <circle cx="60" cy="60" r="50"></circle>
+                <circle cx="60" cy="60" r="50" class="progress"></circle>
+            </svg>
+            <span>66%</span>
+        </div>
+    </aside>
 
-        <div class="col">
+    <!-- Conteúdo principal -->
+    <main class="content">
 
+        <h1>Olá, {{ userName }} 👋</h1>
+        <p>Sua jornada de estudos espera por você. Vamos lá!</p>
+
+        <div class="cards">
+
+            <!-- Card Cronograma -->
             <div class="card">
-                <h3>Meus Cronogramas <span class="emoji">🗓️</span></h3>
-                <p class="subtitle">Hoje</p>
-                <ul>
-                    <li>09:00 — Direito Penal</li>
-                    <li>14:00 — Matemática</li>
-                </ul>
+                <h2>Seu Cronograma</h2>
+                <p class="subtitle">Direito Penal</p>
+                <p class="hour">09:00</p>
+
+                <button class="action" (click)="goToCronograma()">IR PARA CRONOGRAMA</button>
             </div>
 
+            <!-- Card Repositórios -->
             <div class="card">
-                <h3>Meus Repositórios <span class="emoji">📚</span></h3>
-                <ul>
-                    <li>Matemática 2º Grau</li>
-                    <li>Concurso PF</li>
-                </ul>
+                <h2>Meus Repositórios</h2>
+
+                <div class="repo-item">
+                    <span class="icon">📁</span>
+                    <span>Concursos_2024</span>
+                </div>
             </div>
 
         </div>
-
-        <div class="col">
-
-            <div class="card">
-                <h3>Sugestões de Estudo <span class="emoji">💡</span></h3>
-                <p class="subtitle">Hoje</p>
-                <ul>
-                    <li>Gerar FlashCard — Direito Penal</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>Últimas Atividades <span class="emoji">⏱️</span></h3>
-                <ul>
-                    <li>Adicionado Novo Repositório — Concurso PF</li>
-                </ul>
-            </div>
-
-        </div>
-
-
-        <div class="ranking-container">
-            <h3 class="ranking-title">Ranking<br>Repositórios<br>Semanal</h3>
-
-            <ol class="ranking-list">
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-                <li>Concurso PF</li>
-            </ol>
-        </div>
+    </main>
+</div>
