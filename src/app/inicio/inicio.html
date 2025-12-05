@@ -21,8 +21,16 @@
 
             <div class="card">
                 <h2>Meu Cronograma</h2>
-                <p class="subtitle">Direito Penal</p>
-                <p class="hour">09:00</p>
+
+                <p class="subtitle" *ngIf="proximoHorario">
+                    {{ proximoHorario.title }}
+                </p>
+
+                <p class="hour" *ngIf="proximoHorario">
+                    {{ proximoHorario.projectName }}
+                </p>
+
+                <p *ngIf="!proximoHorario">Nenhum horário encontrado</p>
 
                 <button class="action" (click)="goToCronograma()">IR PARA CRONOGRAMA</button>
             </div>

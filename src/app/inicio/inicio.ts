@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from '@angular/common/http';
-
+import { ScheduleService } from '../schedule/models/services/schedule.service';
+import { ScheduleGetResponse } from '../schedule/models/schedule-get-response';
 import { AuthService } from '../auth/services/auth.service';
 import { StudyProjectService, StudyProject } from '../study-project/services/study-project.service';
 
@@ -21,11 +22,15 @@ export class Inicio implements OnInit {
 
     public userName: string = 'Usuário';
     public repositories: StudyProject[] = [];
+    public nextSchedule: ScheduleGetResponse | null = null;
+    public proximoHorario: ScheduleGetResponse | null = null;
+
 
     constructor(
         private router: Router,
         private authService: AuthService,
-        private projectService: StudyProjectService
+        private projectService: StudyProjectService,
+        private scheduleService: ScheduleService,
     ) {}
 
     ngOnInit(): void {
@@ -38,6 +43,8 @@ export class Inicio implements OnInit {
 
         this.carregarNomeUsuario();
         this.carregarRepositorios();
+        this.carregarProximoHorario();
+
     }
 
     goToCronograma(): void {
@@ -58,6 +65,18 @@ export class Inicio implements OnInit {
             }
         });
     }
+
+    carregarProximoHorario() {
+        this.scheduleService.getAll().subscribe({
+            next: (data) => {
+                if (data.length > 0) {
+                    this.proximoHorario = data[0];  // pega o primeiro
+                }
+            },
+            error: err => console.warn("Erro ao buscar horários", err)
+        })
+    }
+
 
     carregarRepositorios() {
         this.projectService.getMyProjects().subscribe({
