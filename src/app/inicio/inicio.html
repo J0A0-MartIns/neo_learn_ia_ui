@@ -1,1 +1,48 @@
-<p>Inicio</p>
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+        <h3>Meu Progresso</h3>
+
+        <div class="progress-circle">
+            <svg>
+                <circle cx="60" cy="60" r="50"></circle>
+                <circle cx="60" cy="60" r="50" class="progress"></circle>
+            </svg>
+            <span>66%</span>
+        </div>
+    </aside>
+
+    <main class="content">
+
+        <h1>Olá, {{ userName }} 👋</h1>
+        <p>Sua jornada de estudos espera por você. Vamos lá!</p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>Meu Cronograma</h2>
+                <p class="subtitle">Direito Penal</p>
+                <p class="hour">09:00</p>
+
+                <button class="action" (click)="goToCronograma()">IR PARA CRONOGRAMA</button>
+            </div>
+
+            <div class="card">
+                <h2>Meus Repositórios</h2>
+
+                <div *ngFor="let repositories of repositories" class="repo-item">
+                    <span class="icon">📁</span>
+                    <span>{{ repositories.name }}</span>
+                </div>
+
+                <div *ngIf="repositories.length === 0" class="repo-item">
+                    <span>Nenhum repositório encontrado</span>
+                </div>
+
+
+                <button class="action" (click)="goToRepositories()">ACESSAR REPOSITÓRIOS</button>
+            </div>
+            </div>
+
+    </main>
+</div>

@@ -1,25 +1,27 @@
 <div *ngIf="loading" class="loading">
-    <p>Gerando questões...</p>
+    <p>Gerando questões com IA...</p>
 </div>
 
 <div *ngIf="!loading && !finished" class="quiz-container">
     <h2 class="title">Questão {{ currentIndex + 1 }} / {{ questions.length }}</h2>
 
     <div class="question-box">
-        <h3>{{ questions[currentIndex].text }}</h3>
+        <h3>{{ questions[currentIndex].data.question }}</h3>
 
         <div class="option"
-             *ngFor="let opt of questions[currentIndex].options"
-             [class.selected]="answers.get(questions[currentIndex].id) === opt.id"
-             (click)="selectAnswer(opt.id)">
-            {{ opt.text }}
+             *ngFor="let opt of questions[currentIndex].data.options"
+             [class.selected]="answers.get(questions[currentIndex].id) === opt"
+             (click)="selectAnswer(opt)">
+            
+            {{ opt }}
+        
         </div>
     </div>
 
     <div class="actions">
-        <button *ngIf="currentIndex > 0" (click)="prevQuestion()">Anterior</button>
+        <button class="nav-btn" *ngIf="currentIndex > 0" (click)="prevQuestion()">Anterior</button>
 
-        <button *ngIf="currentIndex < questions.length - 1"
+        <button class="nav-btn" *ngIf="currentIndex < questions.length - 1"
                 (click)="nextQuestion()">Próxima</button>
 
         <button class="finish"
@@ -34,8 +36,12 @@
     <h2>Resultado</h2>
 
     <p class="score">
-        Você acertou {{ correctAnswers }} de {{ questions.length }}
+        Você acertou <span class="highlight">{{ correctAnswers }}</span> de {{ questions.length }}
     </p>
+
+    <div class="progress-bar-bg">
+        <div class="progress-bar-fill" [style.width.%]="(correctAnswers / questions.length) * 100"></div>
+    </div>
 
     <div class="actions">
         <button class="finish" (click)="retryQuiz()">Refazer</button>

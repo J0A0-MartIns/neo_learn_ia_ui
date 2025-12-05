@@ -1,0 +1,135 @@
+@use 'colors' as *;
+
+.dashboard-container {
+  display: flex;
+  height: calc(100vh - 60px);
+  background: #F4F7F8;
+}
+
+
+.sidebar {
+  width: 250px;
+  background: $verde-escuro;
+  color: #fff;
+  padding: 20px 10px;
+  text-align: center;
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+
+  .progress-circle {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+
+    svg {
+      width: 140px;
+      height: 140px;
+      transform: rotate(-90deg);
+
+      circle {
+        fill: none;
+        stroke-width: 12;
+        stroke: #0e2f38;
+      }
+
+      .progress {
+        stroke: #2EE59D;
+        stroke-dasharray: 314;
+        stroke-dashoffset: calc(314 - (314 * 66) / 100);
+        transition: 0.4s ease;
+      }
+    }
+
+    span {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+}
+
+
+.content {
+  flex: 1;
+  padding: 50px 60px;
+
+  h1 {
+    font-size: 32px;
+    color: #0F2D3A;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #374b4f;
+  }
+
+  .cards {
+    display: flex;
+    gap: 30px;
+  }
+}
+
+
+.card {
+  background: white;
+  padding: 30px;
+  width: 300px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 20px;
+    color: #0F2D3A;
+    margin-bottom: 15px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    color: #0F2D3A;
+  }
+
+  .hour {
+    font-size: 15px;
+    margin: 6px 0 20px;
+  }
+
+  .action {
+    background: #2EE59D;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .2s ease;
+    margin-top: auto;
+
+    &:hover {
+      background: #28cf8b;
+    }
+  }
+
+  .repo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    margin-top: 15px;
+
+    .icon {
+      font-size: 24px;
+    }
+  }
+}

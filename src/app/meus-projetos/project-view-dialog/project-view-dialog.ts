@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { QuizService } from '../../quiz/quiz.service';
 import { Router } from '@angular/router';
+import { QuizRequest } from '../../quiz/quiz.model';
 
 @Component({
   selector: 'app-project-view-dialog',
@@ -94,6 +95,21 @@ export class ProjectViewDialog {
       },
       error: err => {
         console.error("Erro ao gerar questões", err);
+
+    if (!this.projeto || !this.projeto.attachments || this.projeto.attachments.length === 0) {
+      console.error("Projeto ou anexo inválido");
+      return;
+    }
+
+    const fileIdToUse = this.projeto.attachments[0].id;
+    const projectIdToUse = this.projeto.id;
+
+    this.dialogRef.close();
+
+    this.router.navigate(['/quiz'], {
+      queryParams: {
+        projectId: projectIdToUse,
+        fileId: fileIdToUse
       }
     });
   }
