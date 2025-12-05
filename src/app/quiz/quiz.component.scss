@@ -1,11 +1,29 @@
 @use 'colors' as cor;
 
-.quiz-item {
+.loading {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}
+
+.quiz-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.question-box {
   background: #f5f5f5;
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.2s;
 
   &:hover {
@@ -13,93 +31,69 @@
   }
 
   h3 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: #333;
+  }
+}
+
+.option {
+  padding: 12px;
+  background: #eee;
+  margin: 6px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #ddd;
   }
 
-  p {
-    margin-bottom: 1rem;
-    color: #555;
+  &.selected {
+    background: cor.$verde-claro;
+    color: #fff;
+    font-weight: 600;
   }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
 
   button {
-    margin-top: 10px;
     padding: 10px 20px;
-    background-color: cor.$verde-claro;
-    border: none;
     border-radius: 6px;
-    color: #033333;
+    border: none;
     cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.2s;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
 
     &:hover {
-      background-color: cor.$verde-claro;
+      transform: translateY(-2px);
     }
   }
 }
 
-.question {
-  margin-bottom: 2rem;
+button.finish {
+  background-color: cor.$verde-claro;
+  color: #033333;
 
-  h3 {
-    margin-bottom: 0.75rem;
-  }
-
-  .option {
-    padding: 12px;
-    background: #eee;
-    margin: 6px 0;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-
-    &:hover {
-      background-color: #ddd;
-    }
-
-    &.selected {
-      background: cor.$verde-claro;
-      color: #fff;
-      font-weight: 500;
-    }
+  &:hover {
+    background-color: cor.$verde-claro;
   }
 }
 
 button.back {
-  margin-left: 10px;
-  background: #777;
+  background-color: #777;
   color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.2s;
 
   &:hover {
     background-color: #555;
   }
 }
 
-button.finish {
-  background-color: cor.$verde-claro; // verde para ação positiva
-  color: #033333;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 25px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.2s, transform 0.1s;
-
-  &:hover {
-    background-color: cor.$verde-claro;
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-}
-/* Container do resultado */
 .result-container {
   background: #f5f5f5;
   padding: 2rem;
@@ -116,60 +110,15 @@ button.finish {
   }
 
   .score {
-    display: flex;
-    justify-content: space-around;
+    font-size: 1.3rem;
     margin-bottom: 2rem;
-
-    p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #555;
-
-      &.correct {
-        color: #28a745; /* verde para acertos */
-        font-weight: 600;
-      }
-
-      &.total {
-        color: #333;
-      }
-    }
+    font-weight: 600;
+    color: #333;
   }
 
   .actions {
     display: flex;
     justify-content: center;
     gap: 1rem;
-
-    button {
-      border-radius: 6px;
-      padding: 10px 25px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: background-color 0.2s, transform 0.1s;
-
-      &.back {
-        background-color: #777;
-        color: #fff;
-
-        &:hover {
-          background-color: #555;
-          transform: translateY(-1px);
-        }
-      }
-
-      &.finish {
-        background-color: #4a6dff;
-        color: #fff;
-
-        &:hover {
-          background-color: #3653d1;
-          transform: translateY(-1px);
-        }
-      }
-    }
   }
 }
-
-

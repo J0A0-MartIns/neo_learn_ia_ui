@@ -1,7 +1,8 @@
-/*import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Quiz, QuizResult } from './quiz.model';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
+import { Quiz, QuizQuestion } from './quiz.model';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,74 @@ export class QuizService {
         });
     }
 
+    generateQuestions(projectId: number): Observable<QuizQuestion[]> {
+
+        const mockQuestions: Quiz[] = [
+            {
+                id: 1,
+                pergunta: "O que é Inteligência Artificial?",
+                alternativas: [
+                    "Área da computação que simula a inteligência humana",
+                    "Um tipo de hardware avançado",
+                    "Um sistema operacional moderno",
+                    "Uma linguagem de programação"
+                ],
+                correta: 0
+            },
+            {
+                id: 2,
+                pergunta: "Qual é o objetivo de Machine Learning?",
+                alternativas: [
+                    "Criar sites automaticamente",
+                    "Permitir que sistemas aprendam com dados",
+                    "Aumentar a eficiência da GPU",
+                    "Executar comandos remotos"
+                ],
+                correta: 1
+            },
+            {
+                id: 3,
+                pergunta: "Redes neurais artificiais são inspiradas em:",
+                alternativas: [
+                    "Rede elétrica",
+                    "Sistema digestivo",
+                    "Cérebro humano",
+                    "Sistema imunológico"
+                ],
+                correta: 2
+            }
+        ];
+
+        const questions: QuizQuestion[] = mockQuestions.map(q => ({
+            id: q.id,
+            text: q.pergunta,
+            options: q.alternativas.map((alt, index) => ({
+                id: index,
+                text: alt,
+                correct: index === q.correta
+            }))
+        }));
+
+        return of(questions).pipe(delay(1500));
+
+        // Quando o backend estiver pronto:
+        /*
+        return this.http.get<Quiz[]>(`${this.apiUrl}/quiz/generate?projectId=${projectId}`, {
+            headers: this.getHeaders()
+        }).pipe(
+            map(data => data.map(q => ({
+                id: q.id,
+                text: q.pergunta,
+                options: q.alternativas.map((alt, index) => ({
+                    id: index,
+                    text: alt,
+                    correct: index === q.correta
+                }))
+            })))
+        );
+        */
+    }
+
     getAll(): Observable<Quiz[]> {
         return this.http.get<Quiz[]>(`${this.apiUrl}/quiz`, {
             headers: this.getHeaders()
@@ -31,89 +100,9 @@ export class QuizService {
         });
     }
 
-    sendResult(result: QuizResult): Observable<any> {
+    sendResult(result: any): Observable<any> {
         return this.http.post(`${this.apiUrl}/quiz/result`, result, {
             headers: this.getHeaders()
         });
-    }
-}
-*/
-
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Quiz, QuizResult } from './quiz.model';
-
-@Injectable({
-    providedIn: 'root'
-})
-export class QuizService {
-
-    constructor() { }
-
-    private quizzes: Quiz[] = [
-        {
-            id: 1,
-            title: "Introdução a Redes",
-            description: "Teste seus conhecimentos básicos em redes de computadores.",
-            questions: [
-                {
-                    id: 101,
-                    text: "Qual protocolo é usado para obter um endereço IP automaticamente?",
-                    options: [
-                        { id: 1, text: "DNS", correct: false },
-                        { id: 2, text: "DHCP", correct: true },
-                        { id: 3, text: "FTP", correct: false }
-                    ]
-                },
-                {
-                    id: 102,
-                    text: "Qual camada OSI é responsável pelo roteamento?",
-                    options: [
-                        { id: 1, text: "Transporte", correct: false },
-                        { id: 2, text: "Rede", correct: true },
-                        { id: 3, text: "Sessão", correct: false }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 2,
-            title: "Lógica de Programação",
-            description: "Questões básicas sobre lógica e algoritmos.",
-            questions: [
-                {
-                    id: 201,
-                    text: "Qual estrutura repete um bloco de código enquanto a condição é verdadeira?",
-                    options: [
-                        { id: 1, text: "if", correct: false },
-                        { id: 2, text: "for", correct: false },
-                        { id: 3, text: "while", correct: true }
-                    ]
-                },
-                {
-                    id: 202,
-                    text: "Qual é o resultado de: 3 + 2 * 2 ?",
-                    options: [
-                        { id: 1, text: "10", correct: false },
-                        { id: 2, text: "7", correct: true },
-                        { id: 3, text: "8", correct: false }
-                    ]
-                }
-            ]
-        }
-    ];
-
-    getAll(): Observable<Quiz[]> {
-        return of(this.quizzes);
-    }
-
-    getById(id: number): Observable<Quiz> {
-        const quiz = this.quizzes.find(q => q.id === id)!;
-        return of(quiz);
-    }
-
-    sendResult(result: QuizResult): Observable<any> {
-        console.log("Resultado recebido pelo serviço (simulado):", result);
-        return of({ message: "Resultado salvo com sucesso (simulado)" });
     }
 }

@@ -1,46 +1,44 @@
-<div *ngIf="!selectedQuiz && !finished">
-    <h2>Quizzes Disponíveis</h2>
-
-    <div class="quiz-item" *ngFor="let quiz of quizzes">
-        <h3>{{ quiz.title }}</h3>
-        <p>{{ quiz.description }}</p>
-
-        <button (click)="openQuiz(quiz.id)">Iniciar Quiz</button>
-    </div>
+<div *ngIf="loading" class="loading">
+    <p>Gerando questões...</p>
 </div>
 
-<div *ngIf="selectedQuiz && !finished">
-    <h2>{{ selectedQuiz?.title }}</h2>
+<div *ngIf="!loading && !finished" class="quiz-container">
+    <h2 class="title">Questão {{ currentIndex + 1 }} / {{ questions.length }}</h2>
 
-    <div class="question" *ngFor="let q of selectedQuiz?.questions">
-        <h3>{{ q.text }}</h3>
+    <div class="question-box">
+        <h3>{{ questions[currentIndex].text }}</h3>
 
-        <div
-                class="option"
-                *ngFor="let opt of q.options"
-                [class.selected]="answers.get(q.id) === opt.id"
-                (click)="selectAnswer(q.id, opt.id)"
-        >
+        <div class="option"
+             *ngFor="let opt of questions[currentIndex].options"
+             [class.selected]="answers.get(questions[currentIndex].id) === opt.id"
+             (click)="selectAnswer(opt.id)">
             {{ opt.text }}
         </div>
     </div>
 
-    <button class="finish" (click)="finishQuiz()">Finalizar Quiz</button>
-    <button class="back" (click)="backToList()">Voltar</button>
+    <div class="actions">
+        <button *ngIf="currentIndex > 0" (click)="prevQuestion()">Anterior</button>
+
+        <button *ngIf="currentIndex < questions.length - 1"
+                (click)="nextQuestion()">Próxima</button>
+
+        <button class="finish"
+                *ngIf="currentIndex === questions.length - 1"
+                (click)="finishQuiz()">
+            Finalizar
+        </button>
+    </div>
 </div>
 
 <div *ngIf="finished" class="result-container">
-    <h2>Resultado do Quiz</h2>
+    <h2>Resultado</h2>
 
-    <div class="score">
-        <p class="correct">Acertos: {{ correctAnswers }}</p>
-        <p class="total">Total: {{ selectedQuiz?.questions?.length }}</p>
-    </div>
+    <p class="score">
+        Você acertou {{ correctAnswers }} de {{ questions.length }}
+    </p>
 
     <div class="actions">
-        <button class="back" (click)="backToList()">Voltar</button>
-        <button class="finish" (click)="retryQuiz()">Refazer Quiz</button>
+        <button class="finish" (click)="retryQuiz()">Refazer</button>
+        <button class="back" (click)="backToProject()">Voltar ao Projeto</button>
     </div>
 </div>
-
-

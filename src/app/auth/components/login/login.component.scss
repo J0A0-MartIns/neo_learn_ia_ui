@@ -95,16 +95,41 @@ form {
 }
 
 .info-panel {
-  flex: 1.5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--text-color-light);
-  .info-content { text-align: left; max-width: 450px; }
-  .welcome-text { font-size: 1.5rem; font-weight: 300; }
-  h1 { font-size: 4.5rem; font-weight: bold; margin: 0; }
-  .subtitle { font-size: 1.5rem; font-weight: 300; margin-top: 10px; }
-}
+      flex: 1.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-color-light);
+      background: var(--bg-gradient);
+      padding: 2rem;
+    }
+
+    .info-panel .info-content { 
+      text-align: left; 
+      max-width: 450px; 
+      width: 100%;
+    }
+
+    .info-panel .welcome-text { 
+      font-size: 1.5rem; 
+      font-weight: 300; 
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-panel h1 { 
+      font-size: 4.5rem; 
+      font-weight: bold; 
+      margin: 0; 
+      line-height: 1.1;
+    }
+
+    .info-panel .subtitle { 
+      font-size: 1.5rem; 
+      font-weight: 300; 
+      margin-top: 10px; 
+      opacity: 0.9;
+    }
 
 /* === Modal de Erro com Fundo Embaçado === */
 .error-modal-backdrop {
