@@ -44,6 +44,10 @@ export class Inicio implements OnInit {
         this.router.navigate(['/schedule']);
     }
 
+    goToRepositories(): void {
+        this.router.navigate(['/meus-projetos']);
+    }
+
     carregarNomeUsuario() {
         this.authService.getProfile().subscribe({
             next: (data) => {
