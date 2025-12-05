@@ -1,23 +1,41 @@
 <div class="card-wrapper">
-  <h3 class="card-title">{{ projectData.name }}</h3>
 
-  <div class="card-section">
-    <label class="card-label with-line">Descrição</label>
-    <p>{{ projectData.description }}</p>
-  </div>
+    <div class="card-header">
+        <div class="header-content">
+            <h3 class="card-title" [title]="projectData?.name">{{ projectData?.name }}</h3>
+            <span class="card-date">{{ projectData?.createdAt | date:'dd/MM/yyyy' }}</span>
+        </div>
 
-  <div class="card-section">
-    <label class="card-label with-line">Arquivos</label>
-
-    <div class="content-preview-grid">
-      <div *ngFor="let fileName of attachmentsToShow" class="file-container">
-        <div class="image-placeholder"></div>
-        <span class="file-name" [title]="fileName">{{ fileName }}</span>
-      </div>
-
-      <div *ngIf="overflowCount > 0" class="overflow-indicator">
-        +{{ overflowCount }}
-      </div>
+        <mat-icon class="status-icon" [title]="projectData?.isPublic ? 'Público' : 'Privado'">
+            {{ projectData?.isPublic ? 'public' : 'lock' }}
+        </mat-icon>
     </div>
-  </div>
+
+    <div class="card-body">
+        <p class="description">
+            {{ projectData?.description || 'Sem descrição.' }}
+        </p>
+    </div>
+
+    <div class="card-footer">
+        <span class="footer-label" *ngIf="attachmentsToShow.length > 0">Anexos</span>
+
+        <div class="files-grid" *ngIf="attachmentsToShow.length > 0">
+
+            <div class="file-tile" *ngFor="let fileName of attachmentsToShow" [title]="fileName">
+                <mat-icon>insert_drive_file</mat-icon>
+                <span class="file-name">{{ fileName }}</span>
+            </div>
+
+            <div class="file-tile overflow-tile" *ngIf="overflowCount > 0">
+                <span class="plus-text">+{{ overflowCount }}</span>
+            </div>
+
+        </div>
+
+        <div class="empty-files" *ngIf="attachmentsToShow.length === 0">
+            Sem anexos
+        </div>
+    </div>
+
 </div>

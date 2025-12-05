@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'; // Necessário para o DatePipe
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
@@ -11,44 +11,32 @@ import { Router } from '@angular/router';
   selector: 'app-project-view-dialog',
   standalone: true,
   imports: [
-    CommonModule,
+    CommonModule, // Garanta que isso está aqui para formatar as datas
     MatButtonModule,
     MatIconModule,
     HttpClientModule
   ],
-
-
   templateUrl: './project-view-dialog.html',
   styleUrl: './project-view-dialog.scss'
 })
 export class ProjectViewDialog {
   private apiUrl = 'http://localhost:8080';
 
-
-  documentosMock = [
-    { name: 'DocumentoEX 1' },
-    { name: 'DocumentoEX 2' },
-    { name: 'DocumentoEX 3' },
-    { name: 'DocumentoEX 4' }
-  ];
-
   constructor(
-    public dialogRef: MatDialogRef<ProjectViewDialog>,
-    @Inject(MAT_DIALOG_DATA) public projeto: any,
-    private http: HttpClient,
-    private quizService: QuizService,
-    private router: Router
-  ) { }
+      public dialogRef: MatDialogRef<ProjectViewDialog>,
+      @Inject(MAT_DIALOG_DATA) public projeto: any,
+      private http: HttpClient,
+      private quizService: QuizService,
+      private router: Router
+  ) { console.log("DADOS DO PROJETO RECEBIDOS:", this.projeto); }
 
   close() {
     this.dialogRef.close();
   }
 
-
   abrirCronograma() {
     this.dialogRef.close();
-    this.router.navigate(['/schedule'], {
-    });
+    this.router.navigate(['/schedule'], {});
   }
 
   editarProjeto() {
@@ -64,11 +52,12 @@ export class ProjectViewDialog {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     return this.http.post(`${this.apiUrl}/study-project/${id}/publish`, {}, { headers })
-      .subscribe({
-        next: (response: any) => {
-          this.projeto.isPublic = true;
-        }
-      });
+        .subscribe({
+          next: (response: any) => {
+            this.projeto.isPublic = true;
+            this.projeto.visibility = 'Público';
+          }
+        });
   }
 
   unpublish(id: number) {
@@ -76,11 +65,12 @@ export class ProjectViewDialog {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     return this.http.post(`${this.apiUrl}/study-project/${id}/unpublish`, {}, { headers })
-      .subscribe({
-        next: (response: any) => {
-          this.projeto.isPublic = false;
-        }
-      });
+        .subscribe({
+          next: (response: any) => {
+            this.projeto.isPublic = false;
+            this.projeto.visibility = 'Privado';
+          }
+        });
   }
 
   togglePublic() {
@@ -90,22 +80,14 @@ export class ProjectViewDialog {
       this.publish(this.projeto.id);
     }
   }
+
   gerarQuestoes() {
     console.log('Gerando questões...');
-
-    // Chama o backend enviando o ID do projeto
     this.quizService.generateQuestions(this.projeto.id).subscribe({
       next: (questions: any) => {
-
         console.log("QUESTÕES RECEBIDAS:", questions);
-
-        // Armazena temporariamente no localStorage ou service compartilhado
         localStorage.setItem('quiz_questions', JSON.stringify(questions));
-
-        // Fecha o dialog
         this.dialogRef.close();
-
-        // Redireciona
         this.router.navigate(['/quiz'], {
           queryParams: { projectId: this.projeto.id }
         });
@@ -115,6 +97,4 @@ export class ProjectViewDialog {
       }
     });
   }
-
-
 }

@@ -46,19 +46,23 @@ export class MeusProjetos implements OnInit {
     });
   }
 
- 
   public openModal() {
-    this.dialog.open(ProjectDetailsDialogComponent, {
+    const dialogRef = this.dialog.open(ProjectDetailsDialogComponent, {
       width: '800px',
       maxWidth: '95vw',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadProjects();
+      }
     });
   }
 
 public openViewModal(project: StudyProject) {
   this.dialog.open(ProjectViewDialog, {
-    width: '950px', // Largura maior para o layout horizontal
+    width: '950px',
     maxWidth: '95vw',
-    data: project   // Passa os dados do projeto clicado para o modal
+    data: project
   });
 }
 }

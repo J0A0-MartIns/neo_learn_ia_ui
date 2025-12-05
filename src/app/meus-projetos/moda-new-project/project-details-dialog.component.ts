@@ -70,14 +70,25 @@ export class ProjectDetailsDialogComponent {
     }
 
     save() {
+        if (this.documents.length === 0) {
+            this.snackBar.open('É obrigatório anexar pelo menos um arquivo.', 'Atenção', {
+                duration: 3000,
+                verticalPosition: 'top',
+                horizontalPosition: 'center',
+                panelClass: ['warning-snackbar'] // Você pode estilizar isso no CSS se quiser
+            });
+            return; // Interrompe a execução aqui
+        }
+
         if (this.form.valid) {
             const project : ProjectCreateData = {
                 ...this.form.value,
                 file: this.documents,
             };
-            this.dialogRef.close(project);
+
             this.service.create(project).subscribe({
                 next: (response) => {
+                    this.dialogRef.close(project);
                     console.log('Projeto criado com sucesso!', response);
                     this.snackBar.open('Projeto criado com sucesso!', '', {
                         duration: 2000,
