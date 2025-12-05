@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { QuizService } from '../../quiz/quiz.service';
 import { Router } from '@angular/router';
+import { QuizRequest } from '../../quiz/quiz.model';
 
 @Component({
   selector: 'app-project-view-dialog',
@@ -93,25 +94,20 @@ export class ProjectViewDialog {
   gerarQuestoes() {
     console.log('Gerando questões...');
 
-    // Chama o backend enviando o ID do projeto
-    this.quizService.generateQuestions(this.projeto.id).subscribe({
-      next: (questions: any) => {
+    if (!this.projeto || !this.projeto.attachments || this.projeto.attachments.length === 0) {
+      console.error("Projeto ou anexo inválido");
+      return;
+    }
 
-        console.log("QUESTÕES RECEBIDAS:", questions);
+    const fileIdToUse = this.projeto.attachments[0].id;
+    const projectIdToUse = this.projeto.id;
 
-        // Armazena temporariamente no localStorage ou service compartilhado
-        localStorage.setItem('quiz_questions', JSON.stringify(questions));
+    this.dialogRef.close();
 
-        // Fecha o dialog
-        this.dialogRef.close();
-
-        // Redireciona
-        this.router.navigate(['/quiz'], {
-          queryParams: { projectId: this.projeto.id }
-        });
-      },
-      error: err => {
-        console.error("Erro ao gerar questões", err);
+    this.router.navigate(['/quiz'], {
+      queryParams: {
+        projectId: projectIdToUse,
+        fileId: fileIdToUse
       }
     });
   }
