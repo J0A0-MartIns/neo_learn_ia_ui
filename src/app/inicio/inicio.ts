@@ -70,7 +70,7 @@ export class Inicio implements OnInit {
         this.scheduleService.getAll().subscribe({
             next: (data) => {
                 if (data.length > 0) {
-                    this.proximoHorario = data[0];  // pega o primeiro
+                    this.proximoHorario = data[0];
                 }
             },
             error: err => console.warn("Erro ao buscar horários", err)

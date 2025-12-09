@@ -21,13 +21,13 @@
 
             <div class="card">
                 <h2>Meu Cronograma</h2>
-
                 <p class="subtitle" *ngIf="proximoHorario">
-                    {{ proximoHorario.title }}
+                    <span class="icon">⏰</span>
+                    <span>{{ proximoHorario.title }}</span>
                 </p>
-
                 <p class="hour" *ngIf="proximoHorario">
-                    {{ proximoHorario.projectName }}
+                    <span class="icon">📁</span>
+                    <span>{{ proximoHorario.projectName }}</span>
                 </p>
 
                 <p *ngIf="!proximoHorario">Nenhum horário encontrado</p>
