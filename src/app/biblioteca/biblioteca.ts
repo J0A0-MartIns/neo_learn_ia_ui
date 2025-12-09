@@ -27,16 +27,30 @@ export class Biblioteca implements OnInit {
             this.router.navigate(['/login']);
         }
 
-        this.service.getPublicLibrary().subscribe({
-            next: (data) => {
-                this.projects = data;
-                this.allProjects = data;
-            }
+        this.loadLibrary();
+
+        this.service.libraryUpdated$.subscribe(() => {
+            this.loadLibrary();
         });
     }
 
     popupOpen: boolean = false;
     successOpen: boolean = false;
+
+    loadLibrary() {
+        this.service.getPublicLibrary().subscribe({
+            next: (data) => {
+                this.projects = data;
+                this.allProjects = data;
+
+                this.projects.forEach(project => {
+                    this.service.getProjectPopularity(project.id).subscribe({
+                        next: (count) => project.popularity = count
+                    });
+                });
+            }
+        });
+    }
 
     openPopup(project: any) {
         this.selectedProject = project;
@@ -63,6 +77,7 @@ export class Biblioteca implements OnInit {
         this.service.duplicateProject(this.selectedProject.id).subscribe({
             next: () => {
                 this.openSuccessPopup();
+                this.service.notifyLibraryUpdate();
             },
             error: (err) => {
                 console.error("Erro ao duplicar projeto", err);
@@ -98,6 +113,18 @@ export class Biblioteca implements OnInit {
         if (type === 'oldest') {
             this.projects.sort((a, b) =>
                 new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+        }
+
+        if (type === 'most-popular') {
+            this.projects.sort((a, b) =>
+                (b.popularity ?? 0) - (a.popularity ?? 0)
+            );
+        }
+
+        if (type === 'least-popular') {
+            this.projects.sort((a, b) =>
+                (a.popularity ?? 0) - (b.popularity ?? 0)
             );
         }
     }

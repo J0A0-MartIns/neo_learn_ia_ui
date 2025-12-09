@@ -7,7 +7,7 @@
             <div class="metadata">
                 <p>Criado em: {{ projeto?.createdAt | date:'dd/MM/yyyy' }}</p>
                 <p>Última alteração: {{ (projeto?.updatedAt || projeto?.createdAt) | date:'dd/MM/yyyy' }}</p>
-                <p>Compartilhamento: {{ projeto?.visibility || (projeto?.isPublic ? 'Público' : 'Privado') }}</p>
+                <p>Compartilhamento: {{ projeto?.isPublic ? 'Público' : 'Privado' }}</p>
             </div>
 
             <div class="tags" *ngIf="projeto?.tags?.length">
