@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { HttpClientModule } from '@angular/common/http';
-
+import { QuizService } from '../quiz/quiz.service';
 import { AuthService } from '../auth/services/auth.service';
 import { StudyProjectService, StudyProject } from '../study-project/services/study-project.service';
+import { ScheduleService } from '../schedule/models/services/schedule.service';
+import { ScheduleGetResponse } from '../schedule/models/schedule-get-response';
 
 @Component({
     selector: 'app-inicio',
@@ -21,11 +23,15 @@ export class Inicio implements OnInit {
 
     public userName: string = 'Usuário';
     public repositories: StudyProject[] = [];
+    public proximoHorario: ScheduleGetResponse | null = null;
+    public nextRepo: StudyProject | null = null;
 
     constructor(
         private router: Router,
         private authService: AuthService,
-        private projectService: StudyProjectService
+        private projectService: StudyProjectService,
+        private scheduleService: ScheduleService,
+        private quizService: QuizService,
     ) {}
 
     ngOnInit(): void {
@@ -38,6 +44,7 @@ export class Inicio implements OnInit {
 
         this.carregarNomeUsuario();
         this.carregarRepositorios();
+        this.carregarProximoHorario();
     }
 
     goToCronograma(): void {
@@ -47,6 +54,32 @@ export class Inicio implements OnInit {
     goToRepositories(): void {
         this.router.navigate(['/meus-projetos']);
     }
+
+    gerarQuestoesDireto(): void {
+        if (!this.nextRepo?.id) {
+            console.warn('Nenhum repositório disponível para gerar questões.');
+            return;
+        }
+
+        console.log('Gerando questões do projeto:', this.nextRepo.name);
+
+        this.quizService.generateQuestions(this.nextRepo.id).subscribe({
+            next: (questions) => {
+                console.log('QUESTÕES RECEBIDAS:', questions);
+
+                localStorage.setItem('quiz_questions', JSON.stringify(questions));
+
+                this.router.navigate(['/quiz'], {
+                    queryParams: { projectId: this.nextRepo!.id }
+                });
+            },
+            error: err => {
+                console.error('Erro ao gerar questões', err);
+            }
+        });
+    }
+
+
 
     carregarNomeUsuario() {
         this.authService.getProfile().subscribe({
@@ -59,12 +92,28 @@ export class Inicio implements OnInit {
         });
     }
 
+    carregarProximoHorario() {
+        this.scheduleService.getAll().subscribe({
+            next: (data) => {
+                if (data && data.length > 0) {
+                    this.proximoHorario = data[0];
+                }
+            },
+            error: err => console.warn("Erro ao buscar horários", err)
+        });
+    }
+
     carregarRepositorios() {
         this.projectService.getMyProjects().subscribe({
             next: (data) => {
                 this.repositories = data.slice(0, 3);
+                this.nextRepo = this.repositories.length > 0 ? this.repositories[0] : null;
             },
-            error: (err) => console.warn('Erro ao carregar projetos', err)
+            error: (err) => {
+                console.warn('Erro ao carregar projetos', err);
+                this.repositories = [];
+                this.nextRepo = null;
+            }
         });
     }
 }
