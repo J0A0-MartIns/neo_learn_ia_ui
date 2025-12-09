@@ -51,24 +51,22 @@ export class ProjectViewDialog {
         const token = localStorage.getItem('auth_token');
         const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-        return this.http.post(`${this.apiUrl}/study-project/${id}/publish`, {}, { headers })
+        this.http.post<any>(`${this.apiUrl}/study-project/${id}/publish`, {}, { headers })
             .subscribe({
-                next: (response: any) => {
-                    this.projeto.isPublic = true;
-                    this.projeto.visibility = 'Público';
+                next: (response) => {
+                    this.projeto.isPublic = response.isPublic;
                 }
             });
     }
 
     unpublish(id: number) {
         const token = localStorage.getItem('auth_token');
-        const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+        const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
 
-        return this.http.post(`${this.apiUrl}/study-project/${id}/unpublish`, {}, { headers })
+        this.http.post<any>(`${this.apiUrl}/study-project/${id}/unpublish`, {}, {headers})
             .subscribe({
-                next: (response: any) => {
-                    this.projeto.isPublic = false;
-                    this.projeto.visibility = 'Privado';
+                next: (response) => {
+                    this.projeto.isPublic = response.isPublic;
                 }
             });
     }

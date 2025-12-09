@@ -23,6 +23,13 @@
     </div>
 
     <div class="card-footer">
-        {{ project?.name }}
+        <div>
+            {{ project?.name }}
+        </div>
+
+        <div class="project-popularity" *ngIf="project?.popularity !== null && project?.popularity !== undefined">
+            {{ project.popularity === 0 ? 'Nenhuma cópia' : project.popularity + ' cópias' }}
+        </div>
+
     </div>
 </div>
