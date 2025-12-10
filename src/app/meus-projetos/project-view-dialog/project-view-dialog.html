@@ -68,18 +68,47 @@
 
                 <div class="doc-item"
                      *ngFor="let doc of listaArquivos; let i = index"
-                     [class.even]="i % 2 !== 0">
+                     [class.even]="i % 2 !== 0"
+                     (click)="selecionarDocumento(doc)"
+                     [class.selected]="doc.id === documentoSelecionadoId">
+
+                    <input type="radio"
+                           [checked]="doc.id === documentoSelecionadoId"
+                           class="radio-doc" />
+
                     {{ doc.fileName || doc.name || doc.originalFileName || doc }}
                 </div>
 
                 <div *ngIf="listaArquivos.length === 0" style="text-align: center; color: #777; margin-top: 20px;">
                     Nenhum arquivo anexado.
                 </div>
+
             </ng-container>
 
             <div *ngIf="!projeto?.attachments" style="text-align: center; color: #777; margin-top: 20px;">
                 Nenhum arquivo encontrado.
             </div>
+
+            <div class="error-modal-backdrop" *ngIf="showErrorModal">
+                <div class="error-modal">
+                    <div class="error-icon">!</div>
+                    <p>Nenhum documento selecionado!<br>Selecione um documento para gerar o Questionário.</p>
+                    <button class="modal-ok-btn" (click)="closeErrorModal()">OK</button>
+                </div>
+            </div>
+
+            <!-- === Modal de confirmação de exclusão === -->
+            <div class="error-modal-backdrop" *ngIf="showDeleteModal">
+                <div class="error-modal">
+                    <div class="error-icon" style="background-color:#a30000;">!</div>
+                    <p>Tem certeza que deseja excluir o projeto "<strong>{{ projeto.titulo || projeto.name }}</strong>"?</p>
+                    <div class="modal-actions">
+                        <button class="modal-no-btn" (click)="cancelDelete()">Não</button>
+                        <button class="modal-yes-btn" (click)="confirmDelete()">Sim</button>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>

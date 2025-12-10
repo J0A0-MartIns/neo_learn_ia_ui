@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MyProjectService, ProjectCreateData} from "../my-project.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
+
 export interface ProjectDetailsData {
     title: string;
     createdAt: string;
