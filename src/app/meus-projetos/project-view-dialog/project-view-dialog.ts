@@ -34,6 +34,15 @@ export class ProjectViewDialog {
         this.dialogRef.close();
     }
 
+    documentoSelecionadoId: number | null = null;
+    showErrorModal = false;
+    showDeleteModal = false;
+
+    selecionarDocumento(doc: any) {
+        this.documentoSelecionadoId = doc.id;
+        console.log("Documento selecionado:", this.documentoSelecionadoId);
+    }
+
     abrirCronograma() {
         this.dialogRef.close();
         this.router.navigate(['/schedule'], {});
@@ -44,7 +53,29 @@ export class ProjectViewDialog {
     }
 
     excluirProjeto() {
-        console.log('Excluir projeto:', this.projeto.titulo || this.projeto.name);
+        this.showDeleteModal = true;
+    }
+
+    confirmDelete() {
+        const token = localStorage.getItem('auth_token');
+        const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+
+        this.http.delete(`${this.apiUrl}/study-project/${this.projeto.id}`, { headers })
+            .subscribe({
+                next: () => {
+                    console.log('Projeto excluído com sucesso.');
+                    this.showDeleteModal = false;
+                    this.dialogRef.close({ deleted: true });
+                },
+                error: (err) => {
+                    console.error('Erro ao excluir projeto:', err);
+                    this.showDeleteModal = false;
+                }
+            });
+    }
+
+    cancelDelete() {
+        this.showDeleteModal = false;
     }
 
     publish(id: number) {
@@ -82,12 +113,11 @@ export class ProjectViewDialog {
     gerarQuestoes() {
         console.log('Gerando questões...');
 
-        if (!this.projeto || !this.projeto.attachments || this.projeto.attachments.length === 0) {
-            console.error("Projeto ou anexo inválido");
+        if (!this.documentoSelecionadoId) {
+            this.showErrorModal = true;
             return;
         }
 
-        const fileIdToUse = this.projeto.attachments[0].id;
         const projectIdToUse = this.projeto.id;
 
         this.dialogRef.close();
@@ -95,8 +125,12 @@ export class ProjectViewDialog {
         this.router.navigate(['/quiz'], {
             queryParams: {
                 projectId: projectIdToUse,
-                fileId: fileIdToUse
+                fileId: this.documentoSelecionadoId
             }
         });
     }
+    closeErrorModal(): void {
+        this.showErrorModal = false;
+    }
+
 }

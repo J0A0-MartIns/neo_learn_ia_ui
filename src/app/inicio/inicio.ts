@@ -7,6 +7,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { StudyProjectService, StudyProject } from '../study-project/services/study-project.service';
 import { ScheduleService } from '../schedule/models/services/schedule.service';
 import { ScheduleGetResponse } from '../schedule/models/schedule-get-response';
+import {QuizRequest} from "../quiz/quiz.model";
 
 @Component({
     selector: 'app-inicio',
@@ -56,29 +57,30 @@ export class Inicio implements OnInit {
     }
 
     gerarQuestoesDireto(): void {
-        if (!this.nextRepo?.id) {
-            console.warn('Nenhum repositório disponível para gerar questões.');
+        if (!this.nextRepo?.id || !this.nextRepo?.fileId) {
+            console.warn('Repositório sem fileId ou id.');
             return;
         }
 
-        console.log('Gerando questões do projeto:', this.nextRepo.name);
+        const payload: QuizRequest = {
+            projectId: this.nextRepo.id,
+            fileId: this.nextRepo.fileId
+        };
 
-        this.quizService.generateQuestions(this.nextRepo.id).subscribe({
+        this.quizService.generateQuestions(payload).subscribe({
             next: (questions) => {
-                console.log('QUESTÕES RECEBIDAS:', questions);
-
                 localStorage.setItem('quiz_questions', JSON.stringify(questions));
 
                 this.router.navigate(['/quiz'], {
-                    queryParams: { projectId: this.nextRepo!.id }
+                    queryParams: {
+                        projectId: payload.projectId,
+                        fileId: payload.fileId
+                    }
                 });
             },
-            error: err => {
-                console.error('Erro ao gerar questões', err);
-            }
+            error: err => console.error('Erro ao gerar questões', err)
         });
     }
-
 
 
     carregarNomeUsuario() {
