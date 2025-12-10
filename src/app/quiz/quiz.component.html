@@ -3,30 +3,30 @@
 </div>
 
 <div *ngIf="!loading && !finished" class="quiz-container">
-    <h2 class="title">Questão {{ currentIndex + 1 }} / {{ questions.length }}</h2>
+
+    <h2 class="title">
+        Questão {{ currentIndex + 1 }} / {{ questions.length }}
+    </h2>
 
     <div class="question-box">
-        <h3>{{ questions[currentIndex].data.question }}</h3>
+        <h3>{{ questions[currentIndex].question }}</h3>
 
-        <div class="option"
-             *ngFor="let opt of questions[currentIndex].data.options"
-             [class.selected]="answers.get(questions[currentIndex].id) === opt"
-             (click)="selectAnswer(opt)">
-            
+        <div class="option" *ngFor="let opt of questions[currentIndex].options; let i = index"
+            [class.selected]="answers.get(currentIndex) === opt" (click)="selectAnswer(opt)">
             {{ opt }}
-        
         </div>
     </div>
 
     <div class="actions">
-        <button class="nav-btn" *ngIf="currentIndex > 0" (click)="prevQuestion()">Anterior</button>
+        <button class="nav-btn" *ngIf="currentIndex > 0" (click)="prevQuestion()">
+            Anterior
+        </button>
 
-        <button class="nav-btn" *ngIf="currentIndex < questions.length - 1"
-                (click)="nextQuestion()">Próxima</button>
+        <button class="nav-btn" *ngIf="currentIndex < questions.length - 1" (click)="nextQuestion()">
+            Próxima
+        </button>
 
-        <button class="finish"
-                *ngIf="currentIndex === questions.length - 1"
-                (click)="finishQuiz()">
+        <button class="finish" *ngIf="currentIndex === questions.length - 1" (click)="finishQuiz()">
             Finalizar
         </button>
     </div>
@@ -36,7 +36,9 @@
     <h2>Resultado</h2>
 
     <p class="score">
-        Você acertou <span class="highlight">{{ correctAnswers }}</span> de {{ questions.length }}
+        Você acertou
+        <span class="highlight">{{ correctAnswers }}</span>
+        de {{ questions.length }}
     </p>
 
     <div class="progress-bar-bg">
@@ -46,5 +48,6 @@
     <div class="actions">
         <button class="finish" (click)="retryQuiz()">Refazer</button>
         <button class="back" (click)="backToProject()">Voltar ao Projeto</button>
+        <button class="pdf" (click)="generatePdf()">Gerar PDF</button>
     </div>
 </div>

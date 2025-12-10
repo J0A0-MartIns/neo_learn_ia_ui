@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { QuizQuestion, QuizRequest } from './quiz.model';
+import { QuestionContent, QuizQuestion, QuizRequest } from './quiz.model';
 
 @Injectable({
     providedIn: 'root'
@@ -16,15 +16,27 @@ export class QuizService {
         const token = localStorage.getItem('auth_token') || '';
         return new HttpHeaders({
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json' 
+            'Content-Type': 'application/json'
         });
     }
 
-    generateQuestions(data: QuizRequest): Observable<QuizQuestion[]> {
-        return this.http.post<QuizQuestion[]>(
-            `${this.apiUrl}/study-schedule/generate-questions`, 
-            data, 
+    generateQuestions(data: QuizRequest): Observable<QuestionContent[]> {
+        return this.http.post<QuestionContent[]>(
+            `${this.apiUrl}/study-schedule/generate-questions`,
+            data,
             { headers: this.getHeaders() }
+        );
+    }
+
+    generatePdf(payload: {
+        fileId: number;
+        projectId: number;
+        questions: QuestionContent[];
+    }) {
+        return this.http.post(
+            `${this.apiUrl}/study-schedule/generate-pdf`,
+            payload,
+            { headers: this.getHeaders(), responseType: 'blob' }
         );
     }
 }
