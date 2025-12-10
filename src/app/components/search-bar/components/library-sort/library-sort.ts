@@ -9,9 +9,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./library-sort.scss']
 })
 export class LibrarySort {
-  @Output() close = new EventEmitter<void>();
 
-  closeSort() {
+  @Output() close = new EventEmitter<void>();
+  @Output() sort = new EventEmitter<string>();
+
+  select(type: string) {
+    this.sort.emit(type);
     this.close.emit();
   }
 }

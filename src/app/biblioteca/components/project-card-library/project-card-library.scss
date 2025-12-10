@@ -3,32 +3,77 @@
 .card {
   width: 300px;
   height: 180px;
-  background-color: #d9d9d9;
+  background-color: $branco;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform .12s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
 }
 
 .card-content {
   flex: 1;
-  background-color: #d9d9d9;
+  background-color: rgba($verde-escuro, 0.30);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.doc-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.file-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: $verde-escuro;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-count {
+  font-size: 13px;
+  color: $verde-escuro;
 }
 
 .card-footer {
   height: 50px;
-  background-color: #d4ee96;
-
+  background-color: rgba($verde-escuro, 0.9);
   font-family: 'Inter', sans-serif;
+  color: $branco;
+  padding: 6px 14px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.card-footer div:first-child {
   font-size: 16px;
   font-weight: 700;
-  color: $preto;
-  padding: 0 14px;
-  display: flex;
-  align-items: center;
+}
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.project-popularity {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.85;
+  margin-top: 2px;
 }

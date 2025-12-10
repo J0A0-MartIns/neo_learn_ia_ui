@@ -1,8 +1,35 @@
 <div class="card" (click)="onOpen()">
-    <div class="card-content"></div>
+    <div class="card-content">
 
-    <div class="card-footer">
-        {{ project?.name }}
+        <div class="preview-block">
+
+            <svg class="doc-icon" viewBox="0 0 24 24">
+                <path fill="none" stroke="#023535" stroke-width="1.6"
+                      d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                <path fill="none" stroke="#023535" stroke-width="1.6"
+                      d="M14 3v6h6"/>
+            </svg>
+
+            <div class="file-name">
+                {{ getFirstFileName() }}
+            </div>
+
+            <div class="file-count" *ngIf="getExtraCount() > 0">
+                e outros {{ getExtraCount() }} documentos
+            </div>
+
+        </div>
+
     </div>
 
+    <div class="card-footer">
+        <div>
+            {{ project?.name }}
+        </div>
+
+        <div class="project-popularity" *ngIf="project?.popularity !== null && project?.popularity !== undefined">
+            {{ project.popularity === 0 ? 'Nenhuma cópia' : project.popularity + ' cópias' }}
+        </div>
+
+    </div>
 </div>

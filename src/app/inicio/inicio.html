@@ -1,1 +1,73 @@
-<p>Inicio</p>
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+        <h3>🖊️ Treinar Agora</h3>
+
+        <p class="sidebar-subtitle">
+            Gere questões automaticamente do seu repositório
+        </p>
+
+        <div *ngIf="nextRepo; else noNextRepo">
+            <p class="repo-highlight">
+                📚 {{ nextRepo.name }}
+            </p>
+
+            <button class="action primary" (click)="gerarQuestoesDireto()">
+                ⚡ GERAR QUESTÕES
+            </button>
+        </div>
+
+        <ng-template #noNextRepo>
+            <p>Nenhum repositório disponível ainda.</p>
+        </ng-template>
+    </aside>
+
+
+    <main class="content">
+
+        <h1>Olá, {{ userName }} 👋</h1>
+        <p>Sua jornada de estudos espera por você. Vamos lá!</p>
+
+        <div class="cards">
+
+            <!-- CARD CRONOGRAMA -->
+            <div class="card">
+                <h2>Meu Cronograma</h2>
+
+                <p class="subtitle" *ngIf="proximoHorario">
+                    <span class="icon">⏰</span>
+                    <span>{{ proximoHorario.title }}</span>
+                </p>
+
+                <p class="hour" *ngIf="proximoHorario">
+                    <span class="icon">📁</span>
+                    <span>{{ proximoHorario.projectName }}</span>
+                </p>
+
+                <p *ngIf="!proximoHorario">Nenhum horário encontrado</p>
+
+                <button class="action" (click)="goToCronograma()">
+                    IR PARA CRONOGRAMA
+                </button>
+            </div>
+
+            <div class="card">
+                <h2>Meus Repositórios</h2>
+
+                <div *ngFor="let repo of repositories" class="repo-item">
+                    <span class="icon">📁</span>
+                    <span>{{ repo.name }}</span>
+                </div>
+
+                <div *ngIf="repositories.length === 0" class="repo-item">
+                    <span>Nenhum repositório encontrado</span>
+                </div>
+
+                <button class="action" (click)="goToRepositories()">
+                    ACESSAR REPOSITÓRIOS
+                </button>
+            </div>
+
+        </div>
+    </main>
+</div>

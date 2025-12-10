@@ -19,7 +19,6 @@
                             </svg>
 
                             <div class="doc-name">{{ file.fileName }}</div>
-                            <div class="doc-type">{{ file.fileType }}</div>
                         </div>
                     </ng-container>
                 </div>
@@ -31,16 +30,21 @@
 
             <div class="right-panel">
                 <div class="author">
-                    <div class="avatar"></div>
+                    <div class="avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
                     <div class="author-info">
                         <div class="author-label">Autor:</div>
                         <div class="author-name">{{ project?.ownerName }}</div>
                     </div>
                 </div>
 
-                <p class="description">
-                    {{ project?.description || 'Sem descrição disponível.' }}
-                </p>
+                <div class="description-block">
+                    <div class="description-label">Descrição:</div>
+                    <div class="description-text">
+                        {{ project?.description || 'Sem descrição disponível.' }}
+                    </div>
+                </div>
 
             </div>
         </div>

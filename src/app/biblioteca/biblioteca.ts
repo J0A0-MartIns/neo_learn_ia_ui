@@ -15,6 +15,7 @@ import {MyProjectService} from "../meus-projetos/my-project.service";
   styleUrl: './biblioteca.scss'
 })
 export class Biblioteca implements OnInit {
+    allProjects: any[] = [];
     projects: any[] = [];
     selectedProject: any = null;
 
@@ -26,13 +27,30 @@ export class Biblioteca implements OnInit {
             this.router.navigate(['/login']);
         }
 
-        this.service.getPublicLibrary().subscribe({
-            next: (data) => this.projects = data
+        this.loadLibrary();
+
+        this.service.libraryUpdated$.subscribe(() => {
+            this.loadLibrary();
         });
     }
 
     popupOpen: boolean = false;
     successOpen: boolean = false;
+
+    loadLibrary() {
+        this.service.getPublicLibrary().subscribe({
+            next: (data) => {
+                this.projects = data;
+                this.allProjects = data;
+
+                this.projects.forEach(project => {
+                    this.service.getProjectPopularity(project.id).subscribe({
+                        next: (count) => project.popularity = count
+                    });
+                });
+            }
+        });
+    }
 
     openPopup(project: any) {
         this.selectedProject = project;
@@ -51,5 +69,63 @@ export class Biblioteca implements OnInit {
 
     closeSuccessPopup() {
         this.successOpen = false;
+    }
+
+    duplicateSelectedProject() {
+        if (!this.selectedProject) return;
+
+        this.service.duplicateProject(this.selectedProject.id).subscribe({
+            next: () => {
+                this.openSuccessPopup();
+                this.service.notifyLibraryUpdate();
+            },
+            error: (err) => {
+                console.error("Erro ao duplicar projeto", err);
+            }
+        });
+    }
+
+    filterProjects(text: string) {
+        const query = text.toLowerCase().trim();
+
+        this.projects = this.allProjects.filter(p =>
+            p.name.toLowerCase().includes(query) ||
+            (p.description && p.description.toLowerCase().includes(query)) ||
+            (p.ownerName && p.ownerName.toLowerCase().includes(query))
+        );
+    }
+
+    sortProjects(type: string) {
+        if (type === 'az') {
+            this.projects.sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        if (type === 'za') {
+            this.projects.sort((a, b) => b.name.localeCompare(a.name));
+        }
+
+        if (type === 'newest') {
+            this.projects.sort((a, b) =>
+                new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+        }
+
+        if (type === 'oldest') {
+            this.projects.sort((a, b) =>
+                new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+            );
+        }
+
+        if (type === 'most-popular') {
+            this.projects.sort((a, b) =>
+                (b.popularity ?? 0) - (a.popularity ?? 0)
+            );
+        }
+
+        if (type === 'least-popular') {
+            this.projects.sort((a, b) =>
+                (a.popularity ?? 0) - (b.popularity ?? 0)
+            );
+        }
     }
 }

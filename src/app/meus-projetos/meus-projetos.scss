@@ -100,3 +100,24 @@
 .pesquisar {
   color: cor.$verde-escuro;
 }
+
+.empty-state {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.empty-image {
+  width: 180px;
+  max-width: 60%;
+  margin-bottom: 20px;
+}
+
+.empty-message {
+  font-size: 15px;
+  color: cor.$verde-escuro;
+}

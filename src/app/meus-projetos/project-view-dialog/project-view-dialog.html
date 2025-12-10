@@ -2,37 +2,34 @@
 
     <div class="left">
         <div class="header">
-            <h2>{{ projeto?.titulo || projeto?.name }}</h2>
+            <h2>{{ projeto?.name }}</h2>
 
             <div class="metadata">
-                <p>Criado em: {{ projeto?.createdAt || '10/10/2024' }}</p>
-                <p>Última alteração: {{ projeto?.updatedAt || '12/02/2025' }}</p>
-                <p>Compartilhamento: {{ projeto?.visibility || 'Público' }}</p>
+                <p>Criado em: {{ projeto?.createdAt | date:'dd/MM/yyyy' }}</p>
+                <p>Última alteração: {{ (projeto?.updatedAt || projeto?.createdAt) | date:'dd/MM/yyyy' }}</p>
+                <p>Compartilhamento: {{ projeto?.isPublic ? 'Público' : 'Privado' }}</p>
             </div>
 
-            <div class="tags">
-                <span class="tag">Tag 1</span>
-                <span class="tag">Tag 1</span>
-                <span class="tag">Tag 1</span>
-                <span class="tag">Tag 1</span>
+            <div class="tags" *ngIf="projeto?.tags?.length">
+                <span class="tag" *ngFor="let tag of projeto.tags">{{ tag }}</span>
             </div>
         </div>
 
         <div class="description-section">
             <h4>Descrição</h4>
             <p class="desc-text">
-                {{ projeto?.descricao || projeto?.description || 'Sem descrição disponível.' }}
+                {{ projeto?.description || 'Sem descrição disponível.' }}
             </p>
         </div>
 
         <div class="metrics">
             <div class="metric-item">
-                <div class="circle">18</div>
-                <span>Visualizações Únicas</span>
+                <div class="circle">{{ projeto?.views || 0 }}</div>
+                <span>Visualizações</span>
             </div>
             <div class="metric-item">
-                <div class="circle">4,5</div>
-                <span>Avaliações</span>
+                <div class="circle">{{ projeto?.likes || 0 }}</div>
+                <span>Likes</span>
             </div>
         </div>
 
@@ -50,7 +47,10 @@
                 Editar <mat-icon>edit_note</mat-icon>
             </button>
             <button class="btn-action" (click)="excluirProjeto()">
-                Excluir <mat-icon>add_box</mat-icon>
+                Excluir <mat-icon>delete</mat-icon>
+            </button>
+            <button class="btn-action" (click)="gerarQuestoes()">
+                Gerar Questões <mat-icon>quiz</mat-icon>
             </button>
         </div>
     </div>
@@ -64,10 +64,21 @@
         </div>
 
         <div class="document-list">
-            <div class="doc-item"
-                 *ngFor="let doc of (projeto?.conteudo?.length ? projeto.conteudo : documentosMock); let i = index"
-                 [class.even]="i % 2 !== 0">
-                {{ doc.name || doc }}
+            <ng-container *ngIf="projeto?.attachments as listaArquivos">
+
+                <div class="doc-item"
+                     *ngFor="let doc of listaArquivos; let i = index"
+                     [class.even]="i % 2 !== 0">
+                    {{ doc.fileName || doc.name || doc.originalFileName || doc }}
+                </div>
+
+                <div *ngIf="listaArquivos.length === 0" style="text-align: center; color: #777; margin-top: 20px;">
+                    Nenhum arquivo anexado.
+                </div>
+            </ng-container>
+
+            <div *ngIf="!projeto?.attachments" style="text-align: center; color: #777; margin-top: 20px;">
+                Nenhum arquivo encontrado.
             </div>
         </div>
     </div>

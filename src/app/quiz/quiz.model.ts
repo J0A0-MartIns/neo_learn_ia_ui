@@ -1,24 +1,17 @@
-export interface Quiz {
-    id: number;
-    title: string;
-    description: string;
-    questions: QuizQuestion[];
+
+export interface QuizRequest {
+    fileId: number;
+    projectId:number;
+}
+
+
+export interface QuestionContent {
+  question: string;
+  options: string[]; 
+  answer: string;
 }
 
 export interface QuizQuestion {
-    id: number;
-    text: string;
-    options: QuizOption[];
-}
-
-export interface QuizOption {
-    id: number;
-    text: string;
-    correct: boolean;
-}
-
-export interface QuizResult {
-    quizId: number;
-    totalQuestions: number;
-    correctAnswers: number;
+  id: number;
+  data: QuestionContent; 
 }

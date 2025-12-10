@@ -1,0 +1,97 @@
+@import '../../../assets/colors.scss';
+
+.dialog-title {
+  background-color: $verde-escuro;
+  color: $verde-claro;
+  padding: 15px 24px;
+  margin: -24px -24px 20px -24px; 
+  font-size: 1.5em;
+  font-weight: bold;
+  border-bottom: 2px solid $verde-azulado;
+}
+
+.dialog-content {
+  padding-top: 0; 
+}
+
+.schedule-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; 
+  padding: 10px 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+}
+
+.form-input,
+.form-select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box; 
+
+  &:focus {
+    outline: none;
+    border-color: $verde-azulado;
+    box-shadow: 0 0 0 3px rgba($verde-azulado, 0.2);
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: $vermelho;
+  }
+}
+
+.form-select {
+  appearance: none; 
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px; 
+  padding-right: 30px; 
+}
+
+
+.error-message {
+  color: $vermelho;
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+.dialog-actions {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; 
+
+  .cancel-button {
+    color: #555;
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  .create-button {
+    background-color: $verde-azulado; 
+    color: $branco;
+    &:hover {
+      background-color: darken($verde-azulado, 10%);
+    }
+    &:disabled {
+      background-color: #cccccc;
+      color: #999999;
+    }
+  }
+}
